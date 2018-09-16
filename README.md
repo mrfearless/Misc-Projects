@@ -1,3 +1,3 @@
 # Misc-Projects
 
-Misc old source code, programs and scripts.
+Miscellaneous old source code, programs and scripts.
