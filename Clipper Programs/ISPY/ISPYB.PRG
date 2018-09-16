@@ -1,0 +1,2017 @@
+parameters DOS_PAR1
+
+set scoreboard off
+set talk off
+set bell off
+set heading off
+set menu off
+set safety off
+set status off
+set procedure to ispy
+set procedure to procs        && f:\clipprog\prg\procs\procs.prg
+SET UNIQUE OFF
+set date british
+set message to 25
+set deleted on
+set confirm on
+set exclusive on
+
+* INITIALIZE NEW VARIABLES
+
+*-----
+
+OPENFILEFLAG=0
+BINDPATH="F:\STAFF\BIND\"
+declare screens[14]
+screenct=1
+v_crlf=chr(13)+chr(10)              && Cr&Lf
+v_arrows=chr(24)+chr(25)+chr(27)+chr(26)
+v_enter=" "+chr(17)+chr(196)+chr(217)+" "    && " <-ู "
+v_dot=chr(7)
+v_linedrw="-"
+do p_defvars
+*DO SETHPCODES
+leftmarg=SPACE(2)
+*set color to (c_mainbl)
+
+do reset_flags
+
+clear
+if PCOUNT()>0
+        if upper(DOS_PAR1)="-R" .or. upper(DOS_PAR1)="/R"
+                do log_rest
+        endif
+endif
+
+*if file("DAILYOPS.USR")
+*        do P_MSG with "ERROR: Single user operating only"
+*endif
+*save to DAILYOPS.USR
+
+*if file("DAILYOPS.700")
+*        restore from DAILYOPS.700 additive
+*        RI_CT=RI_CT+1
+
+*        if RI_CT=75
+*                do rdx
+*        else
+*                save to DAILYOPS.700 all like RI_*
+*        endif
+*else
+*        do Rdx
+*endif
+
+
+*do getinfo
+*do clearreps
+
+**************
+* START
+**************
+
+SELECT 1
+use ispyuser
+clear
+do scrdis
+res=0
+
+set color to (c_mainbl)
+clear
+do p_defvars
+do scrdis
+select 1
+
+left=24
+length=28
+set color to (c_mainwh)
+   
+
+do while .t.
+   
+   screenct=1
+   do lightcol
+   do cursoff
+   do shadowbox with 5,left-1,15,length+left+2
+   
+   @3, 30 say "         "
+   @ 3,30 say MEMORY(0)
+   
+   @  6, left+2 prompt "Network Stations List     " 
+   @  7, left+2 prompt "Network Stations Database " 
+   @  8, left+2 prompt "Directory & File Listings "  
+   @  9, left+2 prompt "Hard Disk Statistics      "  
+   @ 10, left+2 prompt "Memory & Drivers Installed"  
+   @ 11, left+2 prompt "O/S & Applications Details"
+   @ 12, left+2 prompt "Configuration Files       "
+   @ 13, left+2 prompt "Network Station's Log     "
+   @ 14, left+2 prompt "Exit to main menu         " 
+   
+   menu to res
+   set color to (c_mainWH)
+   do case
+   case res=1
+      do DIR_LIST
+   case res=2
+         select 1
+         set filter to
+         go top
+         do MYB
+   case res=3
+         do file_list
+   case res=4
+         do DISK_STAT
+   case res=5
+        DO MEM_MENU
+   case res=6
+        do os_menu
+   case res=7
+   case res=8
+        do LOG_MENU
+        
+   case res=9
+        exit
+   case res=0
+        exit
+   endcase
+enddo
+
+* RESET WORKING ENVIRONMENT
+
+   select 1
+   use
+   select 2
+   use
+
+set color to
+clear
+close databases
+set talk on
+set escape on
+set bell on
+set heading on
+*SET HELP ON
+set menu on
+set safety on
+set status on
+set scoreboard on
+do curson
+return
+
+
+
+
+******************************************************************************
+*                               PROC DIR_LIST
+******************************************************************************
+PROCEDURE DIR_LIST
+PUBLIC T_FILE_NAME
+
+*x=.t.
+
+*do while .not. x
+
+if file("F:\STAFF\BIND\DIRFILE.TMP")
+        erase F:\STAFF\BIND\DIRFILE.TMP
+endif
+
+run DIR F:\STAFF\BIND\*.*>DIRFILE.TMP
+
+*if ferror() .or. doserror()
+*        ? doserror()
+*        ? ferror()
+*        wait
+*        wait
+*else
+*        x=.t.
+*endif
+*enddo
+*        ? doserror()
+*        ? ferror()
+
+*wait
+
+SELECT 2
+USE DIRFILE
+ZAP
+
+APPEND ALL FROM DIRFILE.TMP SDF FOR DIR_NAME="<DIR>"
+
+GO TOP
+REPLACE FILE_NAME WITH LEFT(FILE_NAME,8)+"."+RIGHT(FILE_NAME,3) FOR .T.
+
+B_DIR=NPOPUPC(5,5,16,5,"DIRFILE->FILE_NAME",1,"")
+*if recno()=1 .and. eof()
+*        DO X_MSG WITH "There Are No Network Stations Available"
+*        return
+*endif
+
+IF B_DIR#0 
+        go top
+        skip B_DIR-1
+        T_FILE_NAME = DIRFILE->FILE_NAME
+        @  22, 12 say T_FILE_NAME
+        release all
+        do reset_flags
+else
+        return
+ENDIF
+return  
+*  End of PROC DIR_LIST *
+
+******************************************************************************
+*                               PROC FILE_LIST
+******************************************************************************
+PROCEDURE FILE_LIST
+public disk_info, vol_info,xx
+
+if .not. file ("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.650")
+        do x_msg with "No directory listing file available"
+        return
+endif
+*PUBLIC T_FILE_NAME
+
+*RUN DIR F:\STAFF\BIND\*.*>DIRFILE.TMP
+
+*if len(disk_info)=0 .or. len(vol_info) =0
+*        if file("d&flist.tmp")
+*                erase f&dlist.tmp
+*        endif
+
+do holdscreen
+do p_note with "Generating directory & file listing, please wait..."
+
+SELECT 3
+USE roughwor
+ZAP
+APPEND ALL FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.650 SDF FOR at("Directory PATH listing",bigstring)>0
+disk_info=alltrim(bigstring)
+zap
+
+APPEND ALL FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.650 SDF FOR at("Volume Serial Number",bigstring)>0
+vol_info=alltrim(bigstring)
+zap
+
+
+APPEND ALL FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.650 SDF FOR .T. .and. at("Directory PATH listing",bigstring)=0 .and. at("Volume Serial Number",bigstring)=0 
+xx=reccount()
+
+
+declare file_aray[xx]
+private file_aray[xx]
+
+GO TOP
+
+t_ct=1
+do while .not. eof()
+        file_aray[t_ct]=alltrim(substr(bigstring,1,42))
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+do popscreen
+*save to F:\STAFF\BIND\&T_FILE_NAME.\d&flist all like file_aray*
+
+*else
+        *declare file_aray[xx]
+        *restore from F:\STAFF\BIND\&T_FILE_NAME.\d&flist additive
+*endif
+
+
+do holdscreen
+tt=6
+ll=16
+bb=20
+rr=62
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+*t_LOG_user=ALLTRIM(t_log_user)
+title="File & Directory Listing"
+lenlu=len(title)
+
+@ tt,((ll-1)+(rr-12)/2)-((lenlu/2)) say title
+@ tt+1,ll+2 say disk_info
+@ tt+2,ll+2 say vol_info
+set color to (c_mainwh)
+
+t_select=achoice(tt+3,ll+2,bb-1,rr-2,file_aray,.t.,"",1)
+
+*for n=1 to xx
+*@1,1 say n
+*adel(file_aray,n)
+*next
+*release all like file_aray*
+do popscreen
+return
+
+*  End of PROC file_LIST *
+
+******************************************************************
+PROCEDURE DISK_STAT
+public totbytesA, avabytesA, userfilesA, userdirsA
+public totbytesB, avabytesB, userfilesB, userdirsB
+do cursoff
+DO HOLDSCREEN
+
+if file("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400")
+        DO ICHK4
+        do ichk4_disp
+        if file("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300")
+                DO ICHK3
+                do ichk3_disp
+                do verify
+                do popscreen
+                return
+        ELSE
+                DO SHADOWBOX WITH 13,15, 15, 61
+                do lightcol
+                @ 14,21 say "No Default Statistics Are Available"
+        ENDIF
+
+ELSE
+        if file("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300")
+                DO ICHK3
+                do ichk3_disp
+        ELSE
+                DO X_MSG WITH "No Hard Disk Statistics Are Available"
+                do popscreen
+                return
+        ENDIF
+ENDIF
+do while INKEY()#27 
+enddo
+set key 27 to
+
+DO POPSCREEN
+RETURN
+*  End of PROC DISKSTAT *
+
+
+*******************************************************************************
+*                               PROC ICHK4
+*******************************************************************************
+procedure ichk4
+
+if ichk4flag=0
+        if TOTBYTESA="" .AND. AVABYTESA="" .AND. USERFILESA="" .AND. USERDIRSA=""
+                SELECT 3
+                USE ROUGHWOR
+                ZAP
+
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400 SDF FOR AT("bytes total",BIGSTRING)>0
+                totbytesA=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400 SDF FOR AT("bytes available",BIGSTRING)>0
+                avabytesA=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400 SDF FOR AT("user files",BIGSTRING)>0
+                userfilesA=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400 SDF FOR AT("directories",BIGSTRING)>0
+                userdirsA=alltrim(roughwor->bigstring)
+                ichk4flag=1
+        endif
+ENDIF
+return
+*  End of PROC ICHK4 *
+
+
+******************************************************************************
+*                            PROC ICHK4_DISP
+******************************************************************************
+procedure ichk4_disp
+
+IF len(TOTBYTESA)#0 .AND. len(AVABYTESA)#0 .AND. len(USERFILESA)#0 .AND. len(USERDIRSA)#0
+        
+        DO LIGHTCOL
+        DO CURSOFF
+        DO SHADOWBOX WITH 5,15, 10, 61
+        
+        set color to (c_mainwb)
+        @ 5, 31 SAY "New Disk Stats"
+        @ 6, 23 say totbytesA
+        @ 7, 23 say avabytesA
+        @ 8, 23 say userfilesA
+        @ 9, 23 say userdirsA
+        
+        TB=AT("bytes",TOTBYTESA)-1
+        TOTB=ALLTRIM(LEFT(TOTBYTESA,TB))
+        TOTBYTS=STRTRAN(TOTB,",")
+        DO LIGHTCOL
+        @ 6,17 SAY STR(INT(VAL(TOTBYTS)/(1048576)),4)+"M"
+        
+        AV=AT("bytes",AVABYTESA)-1
+        AVAB=ALLTRIM(LEFT(AVABYTESA,AV))
+        AVABYTS=STRTRAN(AVAB,",")
+        DO LIGHTCOL
+        @ 7,17 SAY STR(INT(VAL(AVABYTS)/(1048576)),4)+"M"
+        
+        UF=AT("user files",USERFILESA)-1
+        USFI=ALLTRIM(LEFT(USERFILESA,UF))
+        USERF=STRTRAN(USFI,",")
+        DO LIGHTCOL
+        @ 8,17 SAY STR(INT(VAL(USERF)/(1048576)),4)+"M"
+        
+        UD=AT("directories",USERDIRSA)-1
+        USDI=ALLTRIM(LEFT(USERDIRSA,UD))
+        USERD=STRTRAN(USDI,",")
+        DO LIGHTCOL
+        @ 9,17 SAY STR(INT(VAL(USERD)/(1048576)),4)+"M"
+        do normcol
+else        
+        DO X_MSG WITH "There Is No New Data Available "
+ENDIF
+RETURN
+*  End of PROC ICHK4_DISP *
+
+
+********************************************************************************
+*                              PROC ICHK3
+********************************************************************************
+procedure ichk3
+
+if ichk3flag=0
+        IF totbytesB="" .AND. avabytesB="" .AND. userfilesB="" .AND. userdirsB=""
+                SELECT 3
+                USE ROUGHWOR
+                ZAP
+
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300 SDF FOR AT("bytes total",BIGSTRING)>0
+                totbytesB=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300 SDF FOR AT("bytes available",BIGSTRING)>0
+                avabytesB=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300 SDF FOR AT("user files",BIGSTRING)>0
+                userfilesB=alltrim(roughwor->bigstring)
+                APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300 SDF FOR AT("directories",BIGSTRING)>0
+                userdirsB=alltrim(roughwor->bigstring)
+                ichk3flag=1
+        endif
+ENDIF
+return
+*  End of PROC ICHK3 *
+
+
+********************************************************************************
+*                             PROC ICHK3_DISP
+********************************************************************************
+Procedure ichk3_disp
+
+IF len(totbytesB)#0 .AND. len(avabytesB)#0 .AND. len(userfilesB)#0 .AND. len(userdirsB)#0
+        
+        DO LIGHTCOL
+        DO CURSOFF
+        DO SHADOWBOX WITH 12,15, 17, 61
+        
+        set color to (c_mainwb)
+        @ 12, 30 SAY "Default Disk Stats"
+        @ 13, 23 say TOTBYTESB
+        @ 14, 23 say AVABYTESB
+        @ 15, 23 say USERFILESB
+        @ 16, 23 say USERDIRSB
+        
+        TB=AT("bytes",totbytesB)-1
+        TOTB=ALLTRIM(LEFT(totbytesB,TB))
+        TOTBYTS=STRTRAN(TOTB,",")
+        DO LIGHTCOL
+        @ 13,17 SAY STR(INT(VAL(TOTBYTS)/(1048576)),4)+"M"
+        
+        AV=AT("bytes",avabytesB)-1
+        AVAB=ALLTRIM(LEFT(avabytesB,AV))
+        AVABYTS=STRTRAN(AVAB,",")
+        DO LIGHTCOL
+        @ 14,17 SAY STR(INT(VAL(AVABYTS)/(1048576)),4)+"M"
+        
+        UF=AT("user files",userfilesB)-1
+        USFI=ALLTRIM(LEFT(userfilesB,UF))
+        USERF=STRTRAN(USFI,",")
+        DO LIGHTCOL
+        @ 15,17 SAY STR(INT(VAL(USERF)/(1048576)),4)+"M"
+        
+        UD=AT("directories",userdirsB)-1
+        USDI=ALLTRIM(LEFT(userdirsB,UD))
+        USERD=STRTRAN(USDI,",")
+        DO LIGHTCOL
+        @ 16,17 SAY STR(INT(VAL(USERD)/(1048576)),4)+"M"
+        do normcol
+else        
+        DO X_MSG WITH "There Is No New Data Available "
+ENDIF
+RETURN
+*  End of PROC ICHK3_DISP *
+
+
+
+******************************************************************************
+*                              PROC MEM_MENU
+******************************************************************************
+PROCEDURE MEM_MENU
+
+opt=0
+
+IF .NOT. FILE("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700")
+        do holdscreen
+        DO X_MSG WITH "No Memory Statistics Are Available"
+        do popscreen
+        return
+ENDIF
+do holdscreen
+do while .t.
+        DO SHADOWBOX WITH 13,21, 16, 40
+        do cursoff
+        
+        set color to (c_mainwb)
+        @ 13, 28 say "Memory"
+        do lightcol
+        @ 14, 24 PROMPT "Memory Summary" 
+        @ 15, 24 PROMPT "Memory Modules"
+        
+        menu to opt
+        
+        set color to (c_mainWH)
+        do case
+                case OPT=1
+                        do mem_con
+                case OPT=2
+                        do mem_mods
+                case OPT=0
+                        DO POPSCREEN
+                        return
+        endcase
+enddo
+DO POPSCREEN
+release all
+return
+
+*  End of PROC MEM_MENU *
+***********************************************************************************
+procedure mem_xms
+DECLARE MOD[10]
+        
+SELECT 3
+USE ROUGHWOR
+ZAP
+
+*APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("K)",BIGSTRING)>0  .and. at("Free   ",BIGSTRING)>0 
+*free_mem=alltrim(substr(bigstring,1,75))
+
+*zap
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("Extended",BIGSTRING)>0 .or. AT("EMS",BIGSTRING)>0 .or. AT("XMS",BIGSTRING)>0  
+*xms_mem=alltrim(substr(bigstring,1,75))
+*APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("(EMS)",BIGSTRING)>0 
+*up_mem=alltrim(substr(bigstring,1,75))
+*APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("(XMS)",BIGSTRING)>0  
+*res_mem=alltrim(substr(bigstring,1,75)) 
+ 
+
+GO TOP
+
+t_ct=1
+do while .not. eof()
+        mod[t_ct]=alltrim(substr(bigstring,1,75))
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+do holdscreen
+
+tt=6
+ll=5
+bb=20
+rr=74
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+*t_LOG_user=ALLTRIM(t_log_user)
+title="Expanded & Extended Memory"
+lenlu=len(title)
+*lenlu=len(t_log_user)
+
+*@ 18,34 say "Log History"
+*@ tt,((ll)+(rr-ll)/2)-((lentl/3)) say title
+
+@ tt,((ll+3)+(rr-12)/2)-((lenlu/2)) say title
+*@ tt+1,ll+3 say "Name             Total     =   Conventional   +   Upper Memory"
+*@ tt+2,ll+3 say "ออออออออ   อออออออออออออออ   ออออออออออออออออ   ออออออออออออออออ"
+*@ bb-1,ll+3 say free_mem
+set color to (c_mainwh)
+
+t_select=achoice(tt+3,ll+3,bb-2,rr-3,mod,.t.,"",1)
+do popscreen
+release all
+return
+
+
+********************************************************************************
+procedure mem_con
+DECLARE MOD[20]
+        
+SELECT 3
+USE ROUGHWOR
+ZAP
+
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("Total memory",bigstring)>0
+total_mem=alltrim(substr(bigstring,1,75))
+*?total_mem
+a=substr(total_mem,46,9)
+A2=substr(total_mem,33,9)
+
+b=ALLTRIM(strtran(a,",","")) 
+B2=ALLTRIM(strtran(A2,",","")) 
+*?b2
+c=54352
+
+d=val(b)+c
+D2=val(b2)-c
+*?d2
+if len(alltrim(str(d)))<7
+        e1="  "
+        e2=substr(ALLTRIM(STR(d)),1,3)
+        e3=","
+        e3a=substr(ALLTRIM(STR(d)),4,3)
+        e=e1+e2+e3+e3a
+else
+        e1=substr(ALLTRIM(STR(d)),1,1)
+        e2=","
+        e3=substr(ALLTRIM(STR(d)),2,3)
+        e4=","
+        e5=substr(ALLTRIM(STR(d)),5,3)
+        e=e1+e2+e3+e4+e5
+        
+endif
+*?e
+if len(alltrim(str(d2)))<7
+        e4="  "
+        E5=substr(ALLTRIM(STR(d2)),1,3)
+        E6=","
+        E7=substr(ALLTRIM(STR(d2)),4,3)
+        E10=E4+E5+E6+e7
+else        
+        E4=substr(ALLTRIM(STR(d2)),1,1)
+        *?e4
+        E5=","
+        E6=substr(ALLTRIM(STR(d2)),2,3)
+        *?e6
+        E7=","
+        E8=substr(ALLTRIM(STR(d2)),5,3)
+        *?e8
+        E10=E4+E5+E6+e7+e8
+endif
+*?e10
+*wait
+E11=strtran(total_mem,a2,e10)
+total_mem=E11
+
+f=strtran(total_mem,a,e)
+total_mem=f
+*?a
+*?e
+*?a2
+*?e10
+*replace all bigstring with strtran(bigstring,a,e) for at(a,BIGSTRING)>0
+*replace all bigstring with strtran(bigstring,a2,e10) for at(a2,BIGSTRING)>0
+*?total_mem
+zap
+
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR rAT("Conventional      ",BIGSTRING)>0 
+free_mem=alltrim(substr(bigstring,1,75))
+
+a=substr(free_mem,48,7)
+
+A2=substr(free_mem,35,7)
+
+*A3=SUBSTR(FREE_MEM,12,7)
+*A4=SUBSTR(FREE_MEM,22,3)
+
+b=ALLTRIM(strtran(a,",","")) 
+B2=ALLTRIM(strtran(A2,",","")) 
+
+c=54352
+
+d=val(b)+c
+D2=val(b2)-c
+
+e1=substr(ALLTRIM(STR(d)),1,3)
+e2=","
+e3=substr(ALLTRIM(STR(d)),4,3)
+e=e1+e2+e3
+
+
+if len(alltrim(str(d2)))<6
+        e4=" "
+        E5=substr(ALLTRIM(STR(d2)),1,2)
+        E6=","
+        E7=substr(ALLTRIM(STR(d2)),3,3)
+        E10=E4+E5+E6+e7
+else
+        E5=substr(ALLTRIM(STR(d2)),1,3)
+        E6=","
+        E7=substr(ALLTRIM(STR(d2)),4,3)
+        E10=E5+E6+e7
+endif
+*?e10
+*wait
+*E8=strtran(free_mem,a2,e7)
+*free_mem=E8
+*K=INT(D2/1048)
+*K1=ALLTRIM(STR(K))
+*K2=strtran(free_mem,a4,K1)
+*FREE_MEM=K2
+
+f=strtran(free_mem,a,e)
+free_mem=f
+
+replace all bigstring with strtran(bigstring,a,e) for at(a,BIGSTRING)>0
+
+replace all bigstring with strtran(bigstring,a2,e10) for at(a2,BIGSTRING)>0
+
+
+*g=INT(D/1048)
+*H1=ALLTRIM(STR(G))
+*H2=strtran(free_mem,a2,H1)
+*FREE_MEM=H2
+
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("Upper     ",BIGSTRING)>0 .or. AT("Reserved",BIGSTRING)>0  .or. AT("Extended (XMS)",BIGSTRING)>0  
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("Total Expanded (EMS)",BIGSTRING)>0 .or. AT("Free Expanded (EMS)",BIGSTRING)>0   
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("* EMM386",BIGSTRING)>0   
+replace all bigstring with strtran(bigstring," as needed","") for at(" as needed",BIGSTRING)>0
+GO TOP
+
+t_ct=1
+do while .not. eof()
+        mod[t_ct]=alltrim(substr(bigstring,1,75))
+        t_ct=t_ct+1
+        if t_ct=5
+                mod[t_ct]=space(75)
+                t_ct=t_ct+1
+        endif
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+do holdscreen
+tt=6
+ll=9
+bb=19
+rr=69
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+title="Memory Summary"
+lenlu=len(title)
+
+@ tt,((ll+2)+(rr-12)/2)-((lenlu/2)) say title
+@ tt+1,ll+3 say "Type of Memory        Total  =    Used    +    Free"
+@ tt+2,ll+3 say "ออออออออออออออออ   อออออออออ   ออออออออออ   ออออออออออ"
+@ bb-1,ll+3 say total_mem
+set color to (c_mainw2)
+
+t_select=achoice(tt+3,ll+3,bb-2,rr-3,mod,.t.,"",1)
+do popscreen
+release all
+return
+
+?con_mem
+?up_mem
+?res_mem
+?ext_mem
+?
+?exp_mem
+?f_ex_mem
+?emm_dat
+do while inkey()!=13
+enddo
+set key 13 to
+
+do popscreen
+return
+
+
+******************************************************************************
+*                             PROC MEM_MODS
+******************************************************************************
+procedure mem_mods
+DECLARE MOD[30]
+        
+SELECT 3
+USE ROUGHWOR
+ZAP
+
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR AT("K)",BIGSTRING)>0  .and. at("Free   ",BIGSTRING)>0 
+free_mem=alltrim(substr(bigstring,1,75))
+
+a=substr(free_mem,31,7)
+A2=substr(free_mem,41,3)
+A3=SUBSTR(FREE_MEM,12,7)
+A4=SUBSTR(FREE_MEM,22,3)
+
+b=ALLTRIM(strtran(a,",","")) 
+B2=ALLTRIM(strtran(A3,",","")) 
+
+c=54352
+
+d=val(b)+c
+D2=val(b2)+c
+
+if len(str(d))<7
+        e1=" "
+        e2=substr(ALLTRIM(STR(d)),1,2)
+        e3=","
+        e4=substr(ALLTRIM(STR(d)),3,3)
+        e=e1+e2+e3+e4
+else
+        e1=substr(ALLTRIM(STR(d)),1,3)
+        e2=","
+        e3=substr(ALLTRIM(STR(d)),4,3)
+        e=e1+e2+e3
+endif
+
+E4=substr(ALLTRIM(STR(d2)),1,3)
+E5=","
+E6=substr(ALLTRIM(STR(d2)),4,3)
+E7=E4+E5+E6
+E8=strtran(free_mem,a3,e7)
+free_mem=E8
+K=INT(D2/1048)
+K1=ALLTRIM(STR(K))
+K2=strtran(free_mem,a4,K1)
+FREE_MEM=K2
+
+f=strtran(free_mem,a,e)
+free_mem=f
+
+g=INT(D/1048)
+H1=ALLTRIM(STR(G))
+H2=strtran(free_mem,a2,H1)
+FREE_MEM=H2
+
+
+ZAP
+APPEND FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.700 SDF FOR RAT("K)",BIGSTRING)>0 .and. at("ICHK",BIGSTRING)=0 .and. at("Total",BIGSTRING)=0 .and. at("Free",BIGSTRING)=0 .and. at("Largest",BIGSTRING)=0
+GO TOP
+
+t_ct=1
+do while .not. eof()
+        mod[t_ct]=alltrim(substr(bigstring,1,75))
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+do holdscreen
+tt=6
+ll=5
+bb=20
+rr=74
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+*t_LOG_user=ALLTRIM(t_log_user)
+title="Memory Modules"
+lenlu=len(title)
+*lenlu=len(t_log_user)
+
+*@ 18,34 say "Log History"
+*@ tt,((ll)+(rr-ll)/2)-((lentl/3)) say title
+
+@ tt,((ll+3)+(rr-12)/2)-((lenlu/2)) say title
+@ tt+1,ll+3 say "Name             Total     =   Conventional   +   Upper Memory"
+@ tt+2,ll+3 say "ออออออออ   อออออออออออออออ   ออออออออออออออออ   ออออออออออออออออ"
+@ bb-1,ll+3 say free_mem
+set color to (c_mainwh)
+
+t_select=achoice(tt+3,ll+3,bb-2,rr-3,mod,.t.,"",1)
+do popscreen
+return
+
+DO WHILE .NOT. EOF()
+        MOD[N]=ALLTRIM(BIGSTRING)
+        N=N+1
+        SKIP
+ENDDO
+TOTMOD=N
+WAIT
+        
+FOR N=1 TO TOTMOD-1
+        ? MOD[N]
+NEXT
+?
+? TOTMOD
+WAIT
+DO POPSCREEN
+RETURN
+*  End of PROC MEM_MODS *
+
+
+
+********************************************************************************
+*                               PROC LOG_MENU
+********************************************************************************
+procedure LOG_MENU
+do holdscreen
+opt=0
+
+IF .NOT. FILE("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000")
+        DO X_MSG WITH "Station Log Not Available"
+        do popscreen
+        return
+ENDIF
+
+do while .t.
+
+DO SHADOWBOX WITH 11,28, 16, 49
+do cursoff
+
+set color to (c_mainwb)
+@ 11, 34 say "Station Log"
+do lightcol
+@ 12, 31 PROMPT "Log History (User)" 
+@ 13,31 prompt  "Log History (All) "
+@ 14, 31 PROMPT "Last Logged User  " 
+@ 15,31 prompt  "Log Maintenance   "
+menu to opt
+set color to (c_mainWH)
+   
+   do case
+        case OPT=1
+                do LOG_USR with "ICHK.000"
+        case OPT=2
+                t_log_user="All Users"
+                do view_all WITH "ICHK.000"
+        case OPT=3
+                do Last_User with ""
+                do l_user_disp
+        case OPT=4
+                do log_maint
+        case OPT=0
+                DO POPSCREEN
+                return
+        endcase
+enddo
+DO POPSCREEN
+return
+
+
+
+*  End of PROC LOG_MENU *
+
+
+******************************************************************************
+procedure view_all
+PARAMETERS LGFILENAME
+public t_log_user
+private log_aray[255]
+private t_ct
+
+select 4
+use log
+zap
+
+append all FROM F:\STAFF\BIND\&T_FILE_NAME.\&LGFILENAME. delimited with , 
+
+REPLACE log_user WITH strtran(log_user,'"',"") for .t.
+REPLACE log_DATE WITH strtran(log_date,'"',"") for .t.
+REPLACE log_TIME WITH strtran(log_TIME,'"',"") for .t.
+go top
+
+t_ct=1
+do while .not. eof()
+        log_aray[t_ct]=substr(log_user,1,16)+"  "+substr(log_DATE,1,10)+"  "+substr(log_TIME,1,8)
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+tt=6
+ll=18
+bb=18
+rr=59
+
+do holdscreen
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+*t_log_user="All Users"
+t_LOG_user=ALLTRIM(t_log_user)
+
+lenlu=len(t_log_user)
+
+@ bb,34 say "Log History"
+@ tt,((ll)+(rr-ll)/2)-((lenlu/2)) say t_log_user
+@ tt+1,ll+2 say "User Name         Date        Time"
+@ tt+2,ll+2 say "ฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ  ฤฤฤฤฤฤฤฤฤฤ  ฤฤฤฤฤฤฤฤ"
+set color to (c_mainwh)
+t_select=achoice(tt+3,ll+2,bb-1,rr-2,log_aray,.t.,"",1)
+do popscreen
+return
+
+
+******************************************************************************
+
+
+
+
+
+******************************************************************************
+*                             PROC LAST_USER
+******************************************************************************
+procedure Last_User
+parameters log_opt
+public userinfo
+if log_opt=""
+endif
+
+if log_opt="2"
+        SELECT 4
+        USE log
+        ZAP
+
+        APPEND all FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 delimited with , 
+        go bottom
+        
+        userinfo=alltrim(log_user)+","+alltrim(log_date)+","+alltrim(log_time)
+        return
+endif
+
+if userinfo=""
+        SELECT 4
+        USE log
+        ZAP
+
+        APPEND all FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 delimited with , 
+        go bottom
+        lu=alltrim(strtran(log_user,'"',""))
+        dt=strtran(log_date,'"',"")
+        tm=strtran(log_time,'"',"")
+        userinfo=lu+"  "+dt+" "+tm
+endif
+return
+*  End of PROC LAST_USER *
+
+******************************************************************************
+procedure l_user_disp
+do y_msg with "Last User", userinfo
+return
+******************************************************************************
+*                             PROC LOG_USR
+******************************************************************************
+procedure LOG_USR
+parameters lgfilename
+*public lgfilename
+public t_log_user
+
+*if lgfilename=""
+*        lgfilename="ICHK.000"
+*endif
+
+SELECT 4
+USE log 
+zap
+        
+APPEND all FROM F:\STAFF\BIND\&T_FILE_NAME.\&lgfilename. delimited with , 
+
+*REPLACE FILE_NAME WITH LEFT(FILE_NAME,8)+"."+RIGHT(FILE_NAME,3) FOR .T.
+*len_loguser=len(log->log_user)
+*t_log_user=
+*t_log_DATE=
+*t_log_TIME=
+REPLACE log_user WITH strtran(log_user,'"',"") FOR .T.
+REPLACE log_DATE WITH strtran(log_DATE,'"',"") FOR .T.
+REPLACE log_TIME WITH strtran(log_TIME,'"',"") FOR .T.
+
+        
+*set unique off
+*if .not. file("F:\STAFF\BIND\&T_FILE_NAME.\logndx1.tmp")
+*        index on log_user+log_date to F:\STAFF\BIND\&T_FILE_NAME.\logndx1.tmp
+*else
+*        if log1flag=0
+*                use log index F:\STAFF\BIND\&T_FILE_NAME.\logndx1.tmp
+*                reindex
+*                log1flag=1
+*        endif
+*endif
+set unique on        
+
+if .not. file("F:\STAFF\BIND\&T_FILE_NAME.\logndx2.tmp")
+
+        index on log_user to F:\STAFF\BIND\&T_FILE_NAME.\logndx2.tmp
+        use log index F:\STAFF\BIND\&T_FILE_NAME.\logndx2.tmp
+else
+        use log index F:\STAFF\BIND\&T_FILE_NAME.\logndx2.tmp
+        reindex
+endif
+
+
+B_DIR=NPOPUPc(7,13,16,26,"log->log_user",1,"Logged Users")
+if recno()=1 .and. eof()
+        DO X_MSG WITH "There Are No User Logs Available"
+        return
+endif
+
+IF B_DIR#0 
+        go top
+        skip B_DIR-1
+        T_log_user = log->log_user
+        use
+        do LOG_HIST WITH LGFILENAME,T_LOG_USER
+ENDIF
+
+return
+*  End of PROC LOG_USR *
+
+
+******************************************************************************
+*                              PROC LOG_HIST
+******************************************************************************
+procedure LOG_HIST
+PARAMETERS LGFILENAME,t_log_user
+private log_aray[255]
+private t_ct
+*LOG_FILT=T_LOG_USER
+
+select 4
+use log
+zap
+
+append all FROM F:\STAFF\BIND\&T_FILE_NAME.\&LGFILENAME. delimited with , 
+*t_log_user=strtran(log_user,'"',"")
+*t_log_DATE=strtran(log_user,'"',"")
+*t_log_TIME=strtran(log_TIME,'"',"")
+
+REPLACE log_user WITH strtran(log_user,'"',"") for .t.
+REPLACE log_DATE WITH strtran(log_date,'"',"") for .t.
+REPLACE log_TIME WITH strtran(log_TIME,'"',"") for .t.
+go top
+set filter to log->log_user=t_log_user
+go top
+*recall
+*delete all for  while .t.
+
+
+t_ct=1
+do while .not. eof()
+        log_aray[t_ct]=substr(log_DATE,1,10)+"  "+substr(log_TIME,1,8)
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+do holdscreen
+do shadowbox with 6,26,18,51
+set color to (c_mainwb)
+
+t_LOG_user=ALLTRIM(t_log_user)
+
+lenlu=len(t_log_user)
+
+@ 18,34 say "Log History"
+*@ tt,((ll)+(rr-ll)/2)-((lentl/3)) say title
+
+@ 6,((29+1)+(49-29)/2)-((lenlu/2)) say t_log_user
+
+set color to (c_mainwh)
+
+t_select=achoice(7,29,17,49,log_aray,.t.,"",1)
+do popscreen
+return
+
+
+******************************************************************************
+procedure log_maint
+
+do holdscreen
+lmopt=0
+do while .t.
+
+DO SHADOWBOX WITH 7,38, 12, 60
+do cursoff
+
+set color to (c_mainwb)
+@ 7, 42 say "Log Maintenance"
+do lightcol
+@ 8, 41 PROMPT "Backup Log       " 
+@ 9,41 PROMPT  "Restore Last Log " 
+@ 10,41 PROMPT "Delete Old Log(s)" 
+@ 11,41 prompt "View Old Logs    "
+
+menu to lmopt
+set color to (c_mainWH)
+   
+   do case
+        case lmOPT=1
+                select 4
+                use log
+                zap
+                append all FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 delimited with , 
+                IF RECCOUNT()>20
+                        do LOG_Bkup
+                ELSE
+                        DO X_MSG WITH "No backup available, Log is less than 20 entries"
+                endif
+        case lmOPT=2
+                select 4
+                use log
+                zap
+                append all FROM F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 delimited with , 
+                IF RECCOUNT()<3
+                        do LOG_REST
+                ELSE
+                        DO X_MSG WITH "Last log not restored, current log has entries"
+                endif
+                
+        case lmOPT=3
+                do del_logs
+        case lmOPT=4
+                do view_logs
+        case lmOPT=0
+                DO POPSCREEN
+                return
+        endcase
+enddo
+DO POPSCREEN
+return
+
+
+*****************************************************************************
+procedure del_logs
+DECLARE DEL_ARAY[10]
+
+*x=.t.
+
+*do while .not. x
+
+run DIR F:\STAFF\BIND\&T_FILE_NAME.\ichk.00?>DIRFILE.TMP
+*if ferror() .or. doserror()
+*        ? doserror()
+*        ? ferror()
+*        wait
+*else
+*        x=.t.
+*endif
+*enddo
+
+
+SELECT 2
+USE DIRFILE
+ZAP
+APPEND ALL FROM DIRFILE.TMP SDF FOR DIR_NAME#"<DIR>".and. at("ICHK",file_name)>0 .AND. AT("000",FILE_NAME)=0
+
+if reccount()<1
+        do x_msg with "There are no logs are available"
+        return
+endif
+
+GO TOP
+*REPLACE FILE_NAME WITH STRTRAN(FILE_NAME,"    ","LOG") FOR .T.
+*?FILE_NAME
+*?FILE_DATE
+*WAIT
+t_ct=1
+do while .not. eof()
+        DEL_ARAY[t_ct]=STRTRAN(FILE_NAME,"    ","LOG")+"  "+ DIRFILE->FILE_DATE
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+*FOR N=1 TO 2
+*?DEL_ARAY[N]
+*NEXT
+
+ASORT(DEL_ARAY)
+
+do holdscreen
+
+tt=5
+ll=5
+bb=10
+rr=29
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+title="Delete Logs"
+lenlu=len(title)
+@ tt,((ll+3)+(rr-12)/2)-((lenlu/3)) say title
+set color to (c_mainwh)
+t_sel=achoice(tt+1,ll+2,bb-1,rr-2,DEL_ARAY,.t.,"",1)
+
+if t_sel#0
+        go top
+        skip t_sel-1
+        *?del_aray[t_sel]
+        delfile=substr(del_aray[t_sel],1,12)
+        delfile=strtran(delfile,"LOG ",".")
+        
+        *? "F:\STAFF\BIND\&T_FILE_NAME.\"+delfile
+        
+        erase F:\STAFF\BIND\&T_FILE_NAME.\&delfile. 
+        if delfile="ICHK.001"
+        else
+                do del_logs
+        endif
+
+endif
+do popscreen
+
+return
+
+*  End of PROC DEL_LOGS *
+
+
+******************************************************************************
+procedure view_logs
+public lfile1,lfile2
+
+DECLARE oL_ARAY[10]
+*menuflag=0
+*x=.t.
+
+*do while .not. x
+
+run DIR F:\STAFF\BIND\&T_FILE_NAME.\ichk.00?>DIRFILE.TMP
+
+*if ferror() .or. doserror()
+*        ? doserror()
+*        ? ferror()
+*        wait
+*else
+*        x=.t.
+*endif
+
+*enddo
+
+
+
+SELECT 2
+USE DIRFILE
+ZAP
+APPEND ALL FROM DIRFILE.TMP SDF FOR DIR_NAME#"<DIR>".and. at("ICHK",file_name)>0 .AND. AT("000",FILE_NAME)=0
+
+if reccount()<1
+        do x_msg with "There are no logs are available"
+        return
+endif
+
+GO TOP
+*REPLACE FILE_NAME WITH STRTRAN(FILE_NAME,"    ","LOG") FOR .T.
+*?FILE_NAME
+*?FILE_DATE
+*WAIT
+t_ct=1
+do while .not. eof()
+        oL_ARAY[t_ct]=STRTRAN(FILE_NAME,"    ","LOG")+"  "+ DIRFILE->FILE_DATE
+        t_ct=t_ct+1
+        skip
+        if eof()
+                exit
+        endif
+enddo
+
+*FOR N=1 TO 2
+*?oL_ARAY[N]
+*NEXT
+*wait
+ASORT(oL_ARAY)
+
+do holdscreen
+do while .t.
+t_log_user=""
+tt=5
+ll=5
+bb=10
+rr=29
+do shadowbox with tt,ll,bb,rr
+set color to (c_mainwb)
+
+title="Old Logs"
+lenlu=len(title)
+@ tt,((ll+3)+(rr-12)/2)-((lenlu/3)) say title
+set color to (c_mainwh)
+
+t_sel=achoice(tt+1,ll+2,bb-1,rr-2,oL_ARAY,.t.,"",1)
+
+if t_sel#0
+        go top
+        skip t_sel-1
+        *?ol_aray[t_sel]
+        lfile1=alltrim(substr(ol_aray[t_sel],1,12))
+        lfile2=strtran(lfile1,"LOG ",".")
+        
+        *? "F:\STAFF\BIND\&T_FILE_NAME.\"+lfile2
+        
+        do view_logs_menu with lfile1, lfile2
+        *menuflag=1
+else
+        exit
+endif        
+enddo
+do popscreen
+return
+******************************************************************************
+procedure view_logs_menu
+parameters lfile1, lfile2
+
+*?lfile2
+*wait
+*if menuflag=1        
+        olgmenu=0
+        do holdscreen
+        
+        do while .t.
+        do shadowbox with 9,20,12,41
+        do cursoff
+        set color to (c_mainwb)
+        @ 9, 26 say lfile1
+        
+        set color to (c_mainWH)
+        @ 10, 22 prompt "Log History (User)"
+        @ 11, 22 prompt "Log History (All) "
+        
+        
+        menu to olgmenu
+        
+        do case
+                case olgmenu=1
+                        *do holdscreen
+                        do log_usr with "&lfile2."
+                        *do popscreen
+                
+                case olgmenu=2
+                        t_log_user="&lfile1."
+                        LGFILENAME="&lfile2."
+                        do view_all WITH LGFILENAME
+                case olgmenu=0
+                do popscreen
+                return
+        endcase
+        enddo
+*endif        
+do popscreen
+return
+ 
+
+
+******************************************************************************
+procedure log_rest
+
+DECLARE N[10]
+N=9
+*chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N"
+
+*IF FILE ("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000")
+        
+        do while .T.
+                T_N=chr(48+N)
+                chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N."
+                
+                if chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000"
+                        do x_msg with "No Backup log was found"
+                        exit
+                endif
+                
+                IF FILE (chkfile)
+                        do x_msg with "Restoring backup file "+chkfile
+                        erase  F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000
+                        RENAME  &chkfile. TO  F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000
+                        exit
+                ELSE
+                        IF N=0
+                               do x_msg with "No Backup log was found"
+                               exit
+                        ELSE
+                               N=N-1 
+                        ENDIF
+                ENDIF
+        ENDDO
+        return
+        
+        *chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N."
+        
+        *do last_user with "2"
+        *RENAME F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 TO &chkfile.
+        
+        *buffer= userinfo
+        *outfile=fcreate("F:\STAFF\BIND\&T_FILE_NAME.\ichk.000")
+        
+        *fwrite(outfile,buffer)
+        *fclose(outfile)
+        
+        *if .not. file("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N.")
+        *        do x_msg with "Error, Log File Not Generated"
+        *       return
+        *endif
+        
+*ELSE
+        *do x_msg with "Error, No Log File Found To Restore"
+*ENDIF
+
+*return
+*  End of PROC log_rest*
+
+******************************************************************************
+procedure log_bkup
+
+DECLARE N[10]
+N=1
+*chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N"
+
+IF FILE ("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000")
+        
+        do while .T.
+                T_N=chr(48+N)
+                chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N."
+                
+                IF FILE (chkfile)
+                        IF N#9
+                               N=N+1
+                        ELSE
+                               yn=1
+                               do x_aresure with yn,"Backup logs full, Delete an older log ","Yes","No"
+                               if yn#1
+                                        do x_msg with "No log can be generated until an older one is cleared"
+                                        
+                               else
+                                        DO DEL_LOGs 
+                               endif
+                               return
+                        ENDIF
+                ELSE
+                        EXIT
+                ENDIF
+        ENDDO
+        do x_msg with "Generating backup file "+chkfile
+        chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N."
+        
+        do last_user with "2"
+        RENAME F:\STAFF\BIND\&T_FILE_NAME.\ICHK.000 TO &chkfile.
+        
+        buffer= userinfo
+        outfile=fcreate("F:\STAFF\BIND\&T_FILE_NAME.\ichk.000")
+        
+        fwrite(outfile,buffer)
+        fclose(outfile)
+        
+        if .not. file("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.00&T_N.")
+                do x_msg with "Error, Log File Not Generated"
+                return
+        endif
+        
+ELSE
+        do x_msg with "Error, No Log File Found To Backup"
+ENDIF
+
+return
+*  End of PROC log_bkup*
+
+******************************************************************************
+*                              PROC VERIFY
+******************************************************************************
+PROCEDURE VERIFY
+do cursoff
+yn=1
+DO x_ARESURE WITH yn,"Verify New statistics and make as Default","Yes","No"
+if YN#1
+        return
+endif
+
+DECLARE N[10]
+N=1
+*chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.3B&T_N"
+
+IF FILE ("F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300")
+        
+        do while .T.
+                T_N=chr(48+N)
+                chkfile="F:\STAFF\BIND\&T_FILE_NAME.\ICHK.3B&T_N"
+                
+                IF FILE (chkfile)
+                        IF N#9
+                               N=N+1
+                        ELSE
+                               *DO DEL BACK LOG Y/N
+                               n=1
+                               exit
+                        ENDIF
+                ELSE
+                        EXIT
+                ENDIF
+        ENDDO
+        do x_msg with "Generating backup file "+chkfile
+        *? t_n
+        *? chkfile
+        
+        RENAME F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300 TO CHKFILE
+        RENAME F:\STAFF\BIND\&T_FILE_NAME.\ICHK.400 TO F:\STAFF\BIND\&T_FILE_NAME.\ICHK.300
+ELSE
+
+ENDIF
+return
+*  End of PROC VERIFY *
+
+*********************************************************************************************************
+procedure os_menu
+
+opt=0
+do holdscreen
+IF .NOT. FILE("F:\STAFF\BIND\&T_FILE_NAME.\ichk.900")
+        DO X_MSG WITH "No O/S Statistics Are Available"
+        do popscreen
+        return
+ENDIF
+
+select 3
+use roughwor
+zap
+append from F:\STAFF\BIND\&T_FILE_NAME.\ichk.900 sdf for at("Windows",bigstring)>0
+Winver=alltrim(roughwor->bigstring)
+append from F:\STAFF\BIND\&T_FILE_NAME.\ichk.900 sdf for at("DOS",bigstring)>0
+Dosver=alltrim(roughwor->bigstring)
+
+do while .t.
+        DO SHADOWBOX WITH 8,22, 14, 55
+        do cursoff
+        set color to (c_mainwb)
+        @ 11,23 to 11,54
+        @ 8, 27 say "Operating Systems & Apps"
+        set color to (c_mainwh)
+        x=9
+        if len(Winver)#0
+                @ x,25 say "Located "+winver
+                x=x+1
+        else
+                @ x,25 say "No Local Version of Windows"
+                x=x+1
+        endif
+        
+        if len(dosver)#0
+                @ x,25 say "Running "+dosver
+        else
+                @ x,25 say "No Version of Dos found"
+        endif
+        do lightcol
+        
+        @ 12, 25 PROMPT "Applications Search Database"
+        @ 13, 25 PROMPT "Search For Applications     " 
+        menu to opt
+        
+        set color to (c_mainWH)
+        do case
+                case OPT=1
+                        *do 
+        
+                case OPT=2
+                        *do 
+                case OPT=0
+                        DO POPSCREEN
+                        return
+        endcase
+enddo
+*  End of PROC OS_MENU *
+
+******************************************************************
+
+procedure scrdis
+@ 3, 0 SAY REPLICATE(CHR(176),1440)
+
+DO panelbox WITH 0,0,3,79
+DO PANELBOX WITH 21,0,24,79
+set color to (c_mainwb)
+@ 1,18 say "ISPY 1.2  LAN MONITORING UTILITY  (C) 1996"
+@ 2,3 say "USER:          "
+@ 22,3 SAY "ADDRESS:                    "
+
+user=gete("WHOIAM")
+user=substr(user,1,10)
+set color to (c_mainwh)
+@ 2,9 say user
+@ 2,35 say "THERMAL"
+@ 2,55 say "NetWare v3.12 (50 user)"
+RETURN
+
+
+
+*!*****************************************************************************
+*!
+*!      Procedure: CURSON
+*!
+*!      Called by: DAILYOPS.PRG                      
+*!               : ACCPT              (procedure in DAILYOPS.PRG)
+*!
+*!*****************************************************************************
+*procedure curson
+*set cursor on
+*return
+******************************************
+*!*****************************************************************************
+*!
+*!      Procedure: CURSOFF
+*!
+*!      Called by: DAILYOPS.PRG                      
+*!               : ACCPT              (procedure in DAILYOPS.PRG)
+*!               : WAITKEY            (procedure in DAILYOPS.PRG)
+*!
+*!*****************************************************************************
+*procedure cursoff
+*set cursor off
+*return
+******************************************
+
+*!*****************************************************************************
+*!
+*!      Procedure: P_DEFVARS
+*!
+*!      Called by: DAILYOPS.PRG                      
+*!
+*!*****************************************************************************
+procedure p_defvars
+public c_mainbl,c_mainwh,c_mainwb,c_mainno,c_whbl,c_blwh,c_pass,C_MAINXX,c_mainw2
+c_mainbl="G/B+,W/B,B,B,N/BG"
+*c_mainx2="G/B+,B+/W,B,B,N/BG"
+*c_mainbl="GR+/B,W/BG,B,B,N/BG"
+c_mainXX="GR+/B,W/B,B,B,N/BG"
+*c_mainwh="GR+/W,W/RB,W,B,N/BG"
+c_mainwh="GR+/W,W/B,W,B,N/BG"
+c_mainw2="GR+/W,GR+/W,W,B,N/BG"
+c_mainwb="B/W,BG/RB,W,B,N/BG"
+c_mainno="W/W,N/W,W,B,N/RB"
+c_whbl="W/N"
+c_blwh="N/W"
+c_pass="RB/RB,RB/RB"
+return
+
+************************************************************
+*check YN input  (p_aresure)
+*if y
+*        holdscreen
+*        shadowbox
+*        input repchk variable
+*        select rcs file
+*       go top; yippee=0
+*       do while .not. eof()
+*               search file for repchk=REP  if found yippee=1 and then exit do
+*               skip
+*       enddo
+*        print error if at eof() and still no found
+*       else
+*            !!  build up macro
+*             chk_f=chk_f+".and. (.or.  .....)"
+*             popscreen
+*endif
+*return
+
+*******************************************************************************
+procedure customrep
+yn=1
+DO P_ARESURE WITH yn,"Select Report Filter" ,"Yes","No"
+if YN=1
+        DO HOLDSCREEN
+        do curson
+        do lightcol
+        do shadowbox with 14,29,16,49
+        @ 15,30 say " Report Filter: "
+        @ 15,45 get REP_CHK picture '!!!'
+        READ
+        DO POPSCREEN
+        DO CURSOFF        
+        if readkey()=12 .OR. REP_CHK=SPACE(3)
+                return
+        ENDIF
+        select DAILYRCC
+        go top
+        REPCKFLAG=0
+        do while .not. eof()
+                 IF UPPER(REP)=REP_CHK  && search file for repchk=REP  if found yippee=1 and then exit do
+                      REPCKFLAG=1
+                      EXIT
+                 ENDIF
+                 SKIP
+        ENDDO
+        if REPCKFLAG=1
+                NUMAC=""
+                if DAILYRCC->RC1#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC1+"'"
+                ENDIF
+                if DAILYRCC->RC2#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC2+"'"
+                ENDIF
+                if DAILYRCC->RC3#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC3+"'"
+                ENDIF
+                if DAILYRCC->RC4#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC4+"'"
+                ENDIF
+                if DAILYRCC->RC5#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC5+"'"
+                ENDIF
+                if DAILYRCC->RC6#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC6+"'"
+                ENDIF
+                if DAILYRCC->RC7#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC7+"'"
+                ENDIF
+                if DAILYRCC->RC8#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC8+"'"
+                ENDIF
+                if DAILYRCC->RC9#space(3)
+                        NUMAC=NUMAC+" .OR. COST_CENT='"+DAILYRCC->RC9+"'"
+                ENDIF
+                IF NUMAC#""   && i.e. somebody has created a bogus report
+                        NUMAC=SUBSTR(NUMAC,7,LEN(NUMAC))    && REMOVE FIRST " .OR. "
+                        NUMAC=" .AND. ("+NUMAC+")"
+                        CHK_F=CHK_F+NUMAC    && ADD CONDITION TO MAIN CHK_F CHECK
+                ELSE
+                        DO P_MSG WITH "ERROR: Check Report filter setup !"
+                        return
+                ENDIF
+        ELSE        
+                DO CURSOFF
+                do p_msg with "Report filter '"+REP_CHK+"' does not exist!"
+                return
+        endif
+endif
+RETURN
+**************************************************************************
+*                         procedure x_aresure
+**************************************************************************
+procedure x_aresure
+parameters vv,msg,msgy,msgn
+do holdscreen
+t_len=len(msg)
+if t_len>74
+   msg=substr(msg,1,74)
+   t_len=len(msg)
+endif
+t_left=32-int(t_len/2)
+t_right=t_left+t_len+2+7    &&  +2 is for " ?"
+
+do shadowbox with 19,t_left,21,t_right+2
+c_temp=setcolor()
+
+set color to (c_mainwh)
+@ 20,t_left+2 say msg+"?"
+@ 20,t_left+2+t_len+2 prompt "Yes" &&     message substr(msgy+space(80),1,80)
+@ 20,t_left+2+t_len+6 prompt "No"  &&     message substr(msgn+space(80),1,80)
+
+menu to vv
+set color to (c_temp)
+do popscreen
+return
+
+*******************************************************************************
+procedure y_msg
+parameters titles, t_msg
+
+private c_temp
+c_temp=setcolor()
+do holdscreen
+e_msg=ltrim(rtrim(t_msg))
+t_len=len(e_msg)
+titles=ltrim(rtrim(titles))
+lt=len(titles)
+t_left=(40-(t_len/2))-3
+
+t_right=(t_left+t_len)+3
+
+*T_lines=MLCOUNT(E_MSG,((T_right-1)-(T_left+1)))
+t_top=13
+*-T_lines/2
+t_bot=15
+*T_top+T_lines+1
+do shadowbox with t_top,t_left,t_bot,t_right
+set color to (c_mainwh)
+*@ t_bot,28 say "Press       to Continue"
+*set color to (c_mainXX)
+*@ t_bot,34 say v_enter
+set color to (c_mainwh)
+
+t_text=e_msg
+
+*set key 13 to esc_key
+*T_text=MEMOEDIT(T_text,T_top+1,T_left+1,T_bot-1,T_right-1,.f.)
+set color to (c_mainwb)
+
+@ 13,44-(lt/2)-4 say titles
+set color to (c_mainwh)
+@ 14,t_left+2 say t_text
+
+do while inkey()#27 
+enddo 
+
+set key 27 to
+
+do popscreen
+set color to (c_temp)
+return
+
+
+**************************************************************************
+*                            PROCEDURE X_MSG
+**************************************************************************
+procedure x_msg
+parameters t_msg
+
+private c_temp
+c_temp=setcolor()
+do holdscreen
+e_msg=ltrim(rtrim(t_msg))
+
+t_len=len(e_msg)
+
+
+t_left=(40-(t_len/2))-3
+t_right=(t_left+t_len)+3
+
+*T_lines=MLCOUNT(E_MSG,((T_right-1)-(T_left+1)))
+t_top=14
+*-T_lines/2
+t_bot=17
+*T_top+T_lines+1
+do shadowbox with t_top,t_left,t_bot+1,t_right
+set color to (c_mainwh)
+@ t_bot,28 say "Press       to Continue"
+set color to (c_mainXX)
+@ t_bot,34 say v_enter
+set color to (c_mainwh)
+
+t_text=e_msg
+set key 13 to esc_key
+*T_text=MEMOEDIT(T_text,T_top+1,T_left+1,T_bot-1,T_right-1,.f.)
+@ 15,t_left+2 say t_text
+do while inkey()!=13
+enddo
+set key 13 to
+do popscreen
+set color to (c_temp)
+return
+
+
+*: EOF: DAILYOPS.PRG
+
+
+**************************************************************************************
+* setup flags & variables      PROC RESET_FLAGS
+******************************************************************************
+procedure reset_flags
+PUBLIC ICHK4FLAG,ichk3flag,USERINFO, TOTBYTESA, TOTBYTESB
+PUBLIC AVABYTESA, AVABYTESB, USERFILESA,USERFILESB, USERDIRSA, USERDIRSB 
+public disk_info, vol_info
+ichk4flag=0
+ichk3flag=0
+userinfo=""
+totbytesA=""
+avabytesA=""
+userfilesA=""
+userdirsA=""
+totbytesB=""
+avabytesB=""
+userfilesB=""
+userdirsB=""
+disk_info=""
+vol_info=""
+return
+**********************************************************************************
+*procedure getinfo
+*public server,user,nos,scrflag
+
+*if .not. file("f:\public\whoami.exe")
+*        scrflag=0
+*        return
+*endif
+*scrflag=1
+
+*run f:\public\whoami.exe>info.tmp
+
+*select 3
+*use roughwor
+*zap
+
+*append from info.tmp sdf for at("You are user ",bigstring)>0
+*u1=rat("user",bigstring)
+*u2=(at("attached",bigstring))
+*user=substr(bigstring,u1+5,(u2-1)-(u1+5))
+
+*select 3
+
+*use roughwor
+*zap
+
+*append from info.tmp sdf for at("Server",bigstring)>0
+*s1=at(" ",bigstring)
+*s2=(at("is",bigstring))
+*server=substr(bigstring,s1+1,(s2-1)-(s1+1))
+
+*n1=at("NetWare",bigstring)
+*n2=(rat(")",bigstring))
+*nos=substr(bigstring,n1,(n2)-(n1-1))
+
+*erase info.tmp
+*return
