@@ -1,0 +1,31 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_AFKMANAGER_TITLE}</h1>
+<p>{L_ACP_AFKMANAGER_DESC}</p>
+<table cellspacing="1">
+	<col class="row1" /><col class="row1" />
+<tbody>
+<tr>
+	<td class="row3" colspan="1">{L_ACP_AFKER_ID}</td>
+	<td class="row3" colspan="1">{L_ACP_AFKER_NAME}</td>
+	<td class="row3" colspan="1">{L_ACP_AFKER_DATE}</td>
+</tr>
+<!-- IF .afkers -->
+	<!-- BEGIN afkers -->
+		<tr>
+			<td>{afkers.AFKER_ID}</td>
+			<td>{afkers.AFKER_NAME}</td>
+			<td>{afkers.AFKER_DATE}</td>
+		</tr>
+	<!-- END afkers -->
+<!-- ELSE -->
+	<tr>
+		<td style="width: 5%; text-align: center;"><img src="images/file_conflict.gif" alt="{L_CAT}" /></td>
+		<td>{L_ACP_NO_AFKERS}</td>
+	</tr>
+<!-- ENDIF -->
+</tbody>
+</table>
+<div class="clearfix">&nbsp;</div>
+
+<!-- INCLUDE overall_footer.html -->

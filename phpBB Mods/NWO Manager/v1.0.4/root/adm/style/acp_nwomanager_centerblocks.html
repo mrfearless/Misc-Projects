@@ -1,0 +1,70 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_CENTERBLOCKS}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_CENTERS}{L_ACP_NWOMANAGER_CENTERBLOCKSES}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="4"><a href="{U_ACP_NWOMANAGER_CENTERBLOCKS}">{L_ACP_NWOMANAGER_CENTERBLOCKS}</a></td>
+		</tr>
+		<tr>
+			<th width="20%">{L_ACP_NWOMANAGER_CENTERBLOCK_TITLE}</th>
+			<th width="70%">{L_ACP_NWOMANAGER_CENTERBLOCK_TEXT}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_CENTERBLOCK_VISIBLE}</th>
+			<th width="5%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .centerblocks -->
+		<!-- BEGIN centerblocks -->
+		<!-- IF centerblocks.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td>{centerblocks.CENTER_TITLE}</td>
+			<td style="font-size:10px">{centerblocks.CENTER_TEXT}</td>
+			<td><!-- IF centerblocks.S_CENTER_VISIBLE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{centerblocks.U_VISIBLE}"><!-- IF centerblocks.S_CENTER_VISIBLE -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   		<!-- IF centerblocks.S_FIRST_ROW && not centerblocks.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{centerblocks.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not centerblocks.S_FIRST_ROW && not centerblocks.S_LAST_ROW-->
+					<a href="{centerblocks.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					<a href="{centerblocks.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF centerblocks.S_LAST_ROW && not centerblocks.S_FIRST_ROW -->
+					<a href="{centerblocks.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{centerblocks.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{centerblocks.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END centerblocks -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_CENTERBLOCKS}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+
+<div class="clearfix">&nbsp;</div>
+
+<form id="addcenter" method="post">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="centertitle" maxlength="30" />
+	<input class="button2" name="addcenter" type="submit" value="{L_ACP_NWOMANAGER_ADD_CENTERBLOCK}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

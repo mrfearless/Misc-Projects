@@ -1,0 +1,117 @@
+<?php
+/**
+ * @package Clan Application
+ * @version $Id: 0.1.0
+ * @copyright (c) 2009 -[Nwo]- Smurfy.
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
+
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include($phpbb_root_path . 'common.' . $phpEx);
+
+// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+
+
+include($phpbb_root_path . 'includes/constants_nwomanager.' . $phpEx);
+
+// mysql connection
+
+$serverquery = mysql_query("SELECT * FROM ".NWOSERVERS_TABLE." WHERE server_type=0 AND server_visible=1");
+
+$func[]['label'] = "#GameUI_GameMenu_ResumeGame";
+$func[]['command'] = "ResumeGame";
+$func[]['onlyingame'] = 1;
+
+$func[]['label'] = "#GameUI_GameMenu_Disconnect";
+$func[]['command'] = "Disconnect";
+$func[]['onlyingame'] = 1;
+
+$func[]['label'] = "#GameUI_GameMenu_PlayerList";
+$func[]['command'] = "OpenPlayerListDialog";
+$func[]['onlyingame'] = 1;
+
+while($server = mysql_fetch_object($serverquery)){
+	$func[]['label'] = "Join " + $server->server_name;
+	$func[]['command'] = "engine connect "+$server->server_ip;
+	$func[]['onlyingame'] = 0;
+}
+
+$func[]['label'] = "";
+$func[]['command'] = "";
+$func[]['onlyingame'] = "0";
+
+$func[]['label'] = "#GameUI_GameMenu_FindServers";
+$func[]['command'] = "OpenServerBrowser";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_GameMenu_CreateServer";
+$func[]['command'] = "OpenCreateMultiplayerGameDialog";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_GameMenu_Friends";
+$func[]['command'] = "OpenFriendsDialog";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_ReportBug";
+$func[]['command'] = "engine bug";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_LaunchBenchmark";
+$func[]['command'] = "OpenBenchmarkDialog";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_GameMenu_Options";
+$func[]['command'] = "OpenOptionsDialog";
+$func[]['onlyingame'] = 0;
+
+$func[]['label'] = "#GameUI_GameMenu_Quit";
+$func[]['command'] = "Quit";
+$func[]['onlyingame'] = 0;
+
+
+$default = '//UKCS Mega Game Servers GameMenu.res File\n// v1.1  02/07/07\n"GameMenu"\n{';
+
+for($i = 0; $i <= count($func; $i++)
+{
+	$defaukt .= '\t"'.$i.'"\n\t{\n\t\t"label" "'.$func[$i]["label"].'"\n\t\t"command" "'.$func[$i]["command"].'"\n';
+	if($func[$i]['onlyingame'] == 1){
+		$default .= '\t\t"OnlyInGame" "1"';
+	}
+	$default .= '\t}\n';
+}
+
+$default .= "}\n\n";
+
+// open/create temp text file.
+$ftemp = fopen("gamemenu.res", "w+");
+// ^^  here i open a file (or create it) for writing and reading.
+
+fwrite($ftemp, $default);
+// ^^ here i write everything in the file we opened earlier for writing (gamemenu.res)
+
+fclose($ftemp);
+// ^^ we are done with that file, so close it again.
+// now we created a gamemenu.res in the same folder as this file.
+
+$output = file_get_contents("gamemenu.res");
+// ^^ show the result on the screen... \/ down there...
+?><pre>
+<? print_r($output); ?>
+</pre>
+
+<br />
+Todo: Force download headers.
+<?
+$page_title = $user->lang['NWOMANAGER_GENGAMEMENU'];
+page_header($page_title);
+
+$template->set_filenames(array(
+    'body' => nwogengamemenu_body.html',
+));
+
+*/
+?>

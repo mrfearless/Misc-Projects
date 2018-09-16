@@ -1,0 +1,40 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_AFKMANAGER_LIST}</h1>
+<p>{L_ACP_AFKMANAGER_DESC}</p>
+	
+<table>
+	<thead>
+		<tr>
+			<th width="4%">{L_ACP_AFKER_ID}</th>
+			<th width="23%">{L_ACP_AFKER_NAME}</th>
+			<th width="15%">{L_ACP_AFKER_DATE}</th>
+			<th width="15%">{L_ACP_AFKER_AFKTIME}</th>
+			<th width="25%">{L_ACP_AFKER_REASON}</th>
+			<th width="15%">{L_ACP_AFKER_TOPICID}</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .afkers -->
+		<!-- BEGIN afkers -->
+		<!-- IF afkers.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td>{afkers.AFKER_ID}</td>
+			<td><a href={afkers.AFKER_LINK}>{afkers.AFKER_NAME}</a></td>
+			<td>{afkers.AFKER_DATE}</td>
+			<td>{afkers.AFKER_AFKTIME}</td>
+			<td>{afkers.AFKER_REASON}</td>
+			<td><!-- IF afkers.S_AUTO_POST && afkers.S_AFKER_TOPICID --><a href={afkers.AFKER_TOPIC_LINK}>Topic ID: {afkers.AFKER_TOPICID}</a><!-- ELSE -->N/A<!-- ENDIF --></td>
+		</tr>
+		<!-- END afkers -->
+<!-- ELSE -->
+	<tr>
+		<td style="width: 5%; text-align: center;"></td>
+		<td>{L_ACP_NO_AFKERS}</td>
+	</tr>
+<!-- ENDIF -->		
+	</tbody>
+</table>
+<p></p>
+<p>{L_ACP_NOTOPICID_NOTE}</p>
+
+<!-- INCLUDE overall_footer.html -->	

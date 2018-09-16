@@ -1,0 +1,97 @@
+<!-- INCLUDE nwo_portal_overall_header.html -->
+
+<table width="950" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#282E2D">
+<tr>
+		<td>
+			<table width="100%" border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					
+					<!-- // NWO Portal - Left Side Content: Account, Donations -->
+					
+					<td width="100%" valign="top">
+						<!-- INCLUDE nwo_portal_user_account.html -->
+						<br />
+						<!-- INCLUDE nwo_portal_donations.html -->
+					</td>
+					
+					<!-- // NWO Portal - Center Content: Banner Images, Center Blocks, News & Announcements -->
+					
+					<td width="100%" valign="top">
+						<table width="500" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<!-- INCLUDE nwo_portal_banner_images.html -->
+							</tr>
+							<tr>
+								<td>
+									<table width="500" border="0" cellspacing="0" cellpadding="2">
+										<!-- INCLUDE nwo_portal_center_blocks.html -->
+										<tr>
+											<td><img src="{NWO_THEME_PATH}/nwoportalimages/blank.gif" width="10" height="10" /></td>
+										</tr>
+										<!-- IF .news -->
+										<!-- INCLUDE nwo_portal_news.html -->
+										<!-- ENDIF -->
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+					
+					<!-- // NWO Portal - Right Side Content: Latest Forum Posts, Servers -->
+					
+					<td width="100%" valign="top">
+	 
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td valign="top"><img src="{NWO_THEME_PATH}/nwoportalimages/recentposts.png" width="150" height="32" />
+									<table width="100%" border="0" cellspacing="0" class="contentbox_right">
+										<!-- IF .latesttopics -->
+										<!-- INCLUDE nwo_portal_latest_topics.html -->
+										<!-- ENDIF -->
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top"><br /></td>
+							</tr>
+						</table>
+			<img src="{NWO_THEME_PATH}/nwoportalimages/nwoservers.png" width="150" height="32" />
+						<table width="100%" border="0" cellspacing="0" class="contentbox_right">
+							<!-- IF .servers -->
+							<tr>
+								<td valign="top" class="green_bottom_right"></td>
+						  </tr>
+							<!-- INCLUDE nwo_portal_servers.html -->
+							<!-- ENDIF -->
+							<tr>
+								<td valign="top" class="dotted_bottom_right">
+									<table width="100%" border="0" cellspacing="0" class="paddingtable2">
+										<tr>
+											<td valign="top">
+												<table width="100%" border="0" cellspacing="0" class="green_button">
+													<tr>
+														<td><a href="#" class="green">Help</a></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td valign="top"><img src="{NWO_THEME_PATH}/nwoportalimages/blank.gif" width="230" height="5" /></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>    
+		</td>
+	</tr>
+	<tr>
+		<td><img src="{NWO_THEME_PATH}/nwoportalimages/content_bottom.png" width="950" height="17" /></td>
+	</tr>
+</table>
+
+<br />
+<br />
+<!-- INCLUDE nwo_portal_overall_footer.html -->

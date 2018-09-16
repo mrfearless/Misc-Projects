@@ -1,0 +1,60 @@
+<!-- INCLUDE ucp_header.html -->
+<style type="text/css">
+#save-done-msg {border: solid 1px #000;}
+</style>
+
+<form id="ucp" method="post" action="{AFKSTATUS_PROCESSOR}"{S_FORM_ENCTYPE}>
+
+<h2>{L_UCP_AFKMANAGER}</h2>
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<p>{L_UCP_AFKMANAGER_EXPLAIN}</p>
+	<!-- IF S_SAVE_DONE --><p id="save-done-msg"><strong>{L_UCP_AFKMANAGER_CHANGED} </strong><!-- IF S_AUTO_POST -->A New Auto Post Has Been Created To Tell Everyone You Are Now AFK <a href={AFKER_TOPIC_LINK}>Click Here To View Your AFK Auto Post</a></p><!-- ENDIF --><!-- ENDIF -->
+		
+	<fieldset>
+	<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+	<dl>
+		<dt><label for="AFKSTATUS">{L_UCP_AFKMANAGER_AFKSTATUS}</label><br /><span>{L_UCP_AFKMANAGER_AFKSTATUS_EXPLAIN}</span></dt>
+		<dd>
+			<label for="AFKSTATUS1"><input type="radio" name="AFKSTATUS" id="AFKSTATUS1" value="1"<!-- IF S_AFKSTATUS --> checked="checked"<!-- ENDIF --> /> {L_YES}</label> 
+			<label for="AFKSTATUS2"><input type="radio" name="AFKSTATUS" id="AFKSTATUS2" value="0"<!-- IF not S_AFKSTATUS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="AFKRESAON">{L_UCP_AFKMANAGER_REASON}</label><br /><span>{L_UCP_AFKMANAGER_REASON_EXPLAIN}</span></dt>
+		<dd><input maxlength="44" name="AFKREASON" type="text" size=43 value="{AFKREASON}" class="inputbox autowidth"/></dd>
+	</dl>				
+	<dl>
+		<dt><label for="afkreasoncategoryselect">{L_UCP_AFKMANAGER_REASONCATEGORY}</label><br /><span>{L_UCP_AFKMANAGER_REASONCAT_EXPLAIN}</span></dt>
+		<dd><select name="afkreasoncategoryselect" id="lang">{AFKREASONCATEGORIES}</select></dd>
+	</dl>
+	</fieldset>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<div class="panel">	
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<fieldset>
+	<dl>
+		<dt><label for="autopostmsg">{L_UCP_AFKMANAGER_PMMSG}</label><br /><span>{L_UCP_AFKMANAGER_PMMSG_EXPLAIN}</span></dt>
+		<dd><textarea id="autopostmsg" name="AFKPMMSG" rows="3" >{AFKPMMSG}</textarea></dd>
+	</dl>
+	<dl>
+		<dt><label for="AFKAUTODAYS">{L_UCP_AFKMANAGER_AUTOAFK}</label><br /><span>{L_UCP_AFKMANAGER_AUTOAFK_EXPLAIN}</span></dt>
+		<dd><input maxlength="4" name="AFKAUTODAYS" type="text" size=43 value="{AFKAUTODAYS}" class="inputbox autowidth" /></dd>
+	</dl>				
+	</fieldset>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+	
+<fieldset class="submit-buttons">
+	{S_HIDDEN_FIELDS} 
+	<input type="submit" name="ucp-afkmanager-status" value="{L_UCP_AFKMANAGER_CHANGE}" class="button1" />
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,185 @@
+<!-- INCLUDE overall_header.html -->
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<div class="content">
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+	<!-- IF .css_servers -->
+		<tr>
+			<h3>CounterStrike Source Servers</h3>
+		</tr>
+		<tr>
+			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<!-- BEGIN css_servers -->
+				<td align="center" valign="top">
+					<table border="0" align="center" cellpadding="4" cellspacing="0">
+						<tr>
+							<td style="font-size:12px;" >
+								<br /><br /><a href="{css_servers.SERVER_URL}"><strong>{css_servers.SERVER_NAME} - {css_servers.SERVER_IP}</strong></a><br /><br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" align="center" cellpadding="4" cellspacing="0">
+									<td align="left" valign="top">
+								<!-- IF css_servers.S_SERVER_SHOW_HLSTATSX -->
+									<iframe frameborder="0" src="http://nwo.hlstatsx.com/status.php?width=210&server_id={css_servers.SERVER_ID}&game=css2&show_players=0&show_logo=no" scrolling="no" width="212px" height="320px"></iframe>
+								<!-- ELSE -->
+									<tr>
+										<td><strong>Server Info: </strong></td>
+										<td>{css_servers.SERVER_DESCRIPTION}</td>
+									</tr>
+									<tr>
+										<td><strong>Server Map: </strong></td>
+										<td>{css_servers.SERVER_MAP}</td>
+									</tr>
+									<tr>
+										<td><strong>Steambans: </strong></td>
+										<td><!-- IF css_servers.S_SERVER_STEAMBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>SourceBans: </strong></td>
+										<td><!-- IF css_servers.S_SERVER_SOURCEBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>HLstatsX: </strong></td>
+										<td><!-- IF css_servers.S_SERVER_HLSTATSX -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><br /><br /></td>
+									</td>
+								<!-- ENDIF -->
+									</td>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			<!-- END css_servers -->
+			</table>
+		</tr>
+
+	<!-- ENDIF -->
+
+	<!-- IF .tf2_servers -->
+		<tr>
+			<h3>Team Fortress 2 Servers</h3>
+		</tr>
+		<tr>
+			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<!-- BEGIN tf2_servers -->
+				<td align="center" valign="top">
+					<table border="0" align="center" cellpadding="4" cellspacing="0">
+						<tr>
+							<td style="font-size:12px;" >
+								<br /><br /><a href="{tf2_servers.SERVER_URL}"><strong>{tf2_servers.SERVER_NAME} - {tf2_servers.SERVER_IP}</strong></a><br /><br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" align="center" cellpadding="4" cellspacing="0">
+									<td align="left" valign="top">
+								<!-- IF tf2_servers.S_SERVER_SHOW_HLSTATSX -->
+									<iframe frameborder="0" src="http://nwo.hlstatsx.com/status.php?width=210&server_id={tf2_servers.SERVER_ID}&game=tf2&show_players=0&show_logo=no" scrolling="no" width="212px" height="320px"></iframe>
+								<!-- ELSE -->
+									<tr>
+										<td><strong>Server Info: </strong></td>
+										<td>{tf2_servers.SERVER_DESCRIPTION}</td>
+									</tr>
+									<tr>
+										<td><strong>Server Map: </strong></td>
+										<td>{tf2_servers.SERVER_MAP}</td>
+									</tr>
+									<tr>
+										<td><strong>Steambans: </strong></td>
+										<td><!-- IF tf2_servers.S_SERVER_STEAMBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>SourceBans: </strong></td>
+										<td><!-- IF tf2_servers.S_SERVER_SOURCEBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>HLstatsX: </strong></td>
+										<td><!-- IF tf2_servers.S_SERVER_HLSTATSX -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><br /><br /></td>
+									</td>
+								<!-- ENDIF -->
+									</td>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			<!-- END tf2_servers -->
+			</table>
+		</tr>
+	<!-- ENDIF -->
+
+
+
+	<!-- IF .l4d_servers -->
+		<tr>
+			<h3>Team Fortress 2 Servers</h3>
+		</tr>
+		<tr>
+			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<!-- BEGIN l4d_servers -->
+				<td align="center" valign="top">
+					<table border="0" align="center" cellpadding="4" cellspacing="0">
+						<tr>
+							<td style="font-size:12px;" >
+								<br /><br /><a href="{l4d_servers.SERVER_URL}"><strong>{l4d_servers.SERVER_NAME} - {l4d_servers.SERVER_IP}</strong></a><br /><br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" align="center" cellpadding="4" cellspacing="0">
+									<td align="left" valign="top">
+								<!-- IF l4d_servers.S_SERVER_SHOW_HLSTATSX -->
+									<iframe frameborder="0" src="http://nwo.hlstatsx.com/status.php?width=210&server_id={l4d_servers.SERVER_ID}&game=l4d&show_players=0&show_logo=no" scrolling="no" width="212px" height="320px"></iframe>
+								<!-- ELSE -->
+									<tr>
+										<td><strong>Server Info: </strong></td>
+										<td>{l4d_servers.SERVER_DESCRIPTION}</td>
+									</tr>
+									<tr>
+										<td><strong>Server Map: </strong></td>
+										<td>{l4d_servers.SERVER_MAP}</td>
+									</tr>
+									<tr>
+										<td><strong>Steambans: </strong></td>
+										<td><!-- IF l4d_servers.S_SERVER_STEAMBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>SourceBans: </strong></td>
+										<td><!-- IF l4d_servers.S_SERVER_SOURCEBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><strong>HLstatsX: </strong></td>
+										<td><!-- IF l4d_servers.S_SERVER_HLSTATSX -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+									</tr>
+									<tr>
+										<td><br /><br /></td>
+									</td>
+								<!-- ENDIF -->
+									</td>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			<!-- END l4d_servers -->
+			</table>
+		</tr>
+	<!-- ENDIF -->
+
+
+
+
+</table>
+	</div>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<!-- INCLUDE overall_footer.html -->

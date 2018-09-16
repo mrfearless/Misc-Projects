@@ -1,0 +1,60 @@
+<!-- INCLUDE overall_header.html -->
+<h1>{L_ACP_APPMANAGER_STATUSES}</h1>
+<p>{L_ACP_APPMANAGER_STATUSES_DESC}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+
+<table cellspacing="1">
+
+	<thead>
+		<tr>
+			<!-- //<th width="4%">{L_ACP_SECTION_ID}</th> -->
+			<th width="15%">{L_ACP_STATUS_TITLE}</th>
+			<th width="40%">{L_ACP_STATUS_TEXT}</th>
+			<th width="5%">{L_ACP_STATUS_REAPPLY}</th>
+			<th width="5%">{L_ACP_STATUS_PM}</th>
+			<th width="21%">{L_ACP_STATUS_PMMSG}</th>
+			<!-- //<th width="5%">{L_ACP_SECTION_ORDER}</th>-->
+			<th width="4%"><!-- //Action--></th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<!-- IF .appstatus -->
+    		<!-- BEGIN appstatus -->
+    			<!-- IF appstatus.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+    			<!-- //<td>{appstatus.STATUS_ID}</td> -->
+				<td <!-- IF appstatus.S_STATUS_COLOR -->style="color:#{appstatus.STATUS_COLOR}"<!-- ENDIF -->>{appstatus.STATUS_TITLE}</td>
+				<td style="font-size:10px">{appstatus.STATUS_TEXT}</td>
+				<td><!-- IF appstatus.S_STATUS_REAPPLY -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+				<td><!-- IF appstatus.S_STATUS_PM -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+				<td style="font-size:10px">{appstatus.STATUS_PMMSG}</td>
+		   		<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+					<a href="{appstatus.U_EDIT}">{ICON_EDIT}</a>
+					<a href="{appstatus.U_DELETE}">{ICON_DELETE}</a></td>
+				</tr>
+		   	<!-- END appstatus -->
+	    <!-- ELSE -->
+	    	<tr>
+	    		<td class="row3" colspan="5">{L_ACP_NO_STATUSES}</td>
+	    	</tr>
+	    <!-- ENDIF -->
+	</tbody>
+</table>
+<div class="clearfix">&nbsp;</div>
+<form id="addstatusnow" method="post" action="{U_ACTION}">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="statusname" maxlength="30" />
+	<input class="button2" name="addstatus" type="submit" value="{L_ACP_CREATE_STATUS}" />
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

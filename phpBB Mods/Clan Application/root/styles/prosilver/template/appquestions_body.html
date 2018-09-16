@@ -1,0 +1,19 @@
+<!-- INCLUDE overall_header.html -->
+<form id="application_questions" method="post" action="{PROCESS_APPQUESTIONS}"{S_FORM_ENCTYPE}>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<h2>{PAGE_TITLE}</h2>
+	<div class="content">
+		<p>NWO Questions</p>
+		<p>{USERNAME}</p>
+	</div>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<fieldset class="submit-buttons">
+	{S_HIDDEN_FIELDS}
+	<input type="submit" name="submit_application" value="{L_APP_SUBMIT}" class="button1" />&nbsp;&nbsp;<input class="button1" type="reset" value="{L_RESET}" name="reset" />
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+<!-- INCLUDE overall_footer.html -->

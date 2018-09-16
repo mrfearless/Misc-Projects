@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_APPMANAGER_FORM}</h1>
+<p>{L_ACP_APPMANAGER_FORM_DESC}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<form id="module" method="post" action="{U_ACTION}">
+	<div class="content">
+		<table>
+		<!-- IF appform -->
+    		<!-- BEGIN appform -->
+			<tr><td>
+    			<fieldset>
+    				<dl>
+						<dt><label for="SECTION_TITLE">{L_ACP_APPMANAGER_SECTION_TITLE}</label><br /><span>{L_ACP_APPMANAGER_SECTION_TITLE_EXPLAIN}</span></dt>
+						<dd><input name=section_title[] maxlength="60" type="text" size=60 value="{appform.SECTION_TITLE}" class="inputbox autowidth"/></dd>
+					</dl>
+    				<dl>
+						<dt><label for="SECTION_TEXT">{L_ACP_APPMANAGER_SECTION_TEXT}</label><br /><span>{L_ACP_APPMANAGER_SECTION_TEXT_EXPLAIN}</span></dt>
+						<dd><textarea name=section_text[] rows="3" >{appform.SECTION_TEXT}</textarea></dd>
+					</dl>
+    			</fieldset>
+			</td></tr>
+    		<!-- END appform -->
+    	<!-- ENDIF -->
+    		<tr><td><p>{L_ACP_APPMANAGER_FORM_NOTE}</p></td></tr>
+    	</table>
+
+    </div>
+
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+
+</fieldset>
+
+</form>
+
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,72 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_SUBSCRIPTION_MGT_TITLE}</h1>
+<p>{L_ACP_SUBSCRIPTION_MGT_DESC}</p>
+<table cellspacing="1">
+	<col class="row1" /><col class="row1" /><col class="row1" /><col class="row1" /><col class="row1" /><col class="row1" /><col class="row1" /><col class="row1" /><col class="row2" />
+<tbody>
+<tr>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_ACCOUNT}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_REGDATE}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_INITIALPAY}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_CYCLE}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_AMOUNT}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_NEXTDATE}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_OVERDUE}</td>
+	<td class="row3" colspan="1">{L_ACP_SUBSCRIPTION_STATUS}</td>
+	<td class="row3" colspan="1"></td>
+</tr>
+<!-- IF .subscription -->
+	<!-- BEGIN subscription -->
+		<tr>
+			<td><a href="subscription.U_SUBSCRIPTION}">{subscription.SUBSCRIPTION_TITLE}</a></td>
+			<td>{subscription.SUBSCRIPTION_REGDATE}</td>
+			<td>{subscription.SUBSCRIPTION_INITIALPAY}</td>
+			<td>{subscription.SUBSCRIPTION_CYCLE}</td>
+			<td>{subscription.SUBSCRIPTION_AMOUNT}</td>
+			<td>{subscription.SUBSCRIPTION_NEXTDATE}</td>
+			<td>{subscription.SUBSCRIPTION_OVERDUE}</td>
+			<td>{subscription.SUBSCRIPTION_STATUS}</td>
+			<td style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<!-- IF subscription.S_FIRST_ROW && not subscription.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{subscription.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not subscription.S_FIRST_ROW && not subscription.S_LAST_ROW-->
+					<a href="{subscription.U_MOVE_UP}">{ICON_MOVE_UP}</a> 
+					<a href="{subscription.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a> 
+				<!-- ELSEIF subscription.S_LAST_ROW && not subscription.S_FIRST_ROW -->
+					<a href="{subscription.U_MOVE_UP}">{ICON_MOVE_UP}</a>	
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{subscription.U_EDIT}">{ICON_EDIT}</a> 
+				<a href="{subscription.U_DELETE}">{ICON_DELETE}</a>
+			</td>
+		</tr>
+	<!-- END subscription -->
+<!-- ELSE -->
+	<tr>
+		<td style="width: 5%; text-align: center;"><img src="images/file_conflict.gif" alt="{L_CAT}" /></td>
+		<td>{L_ACP_NO_SUBSCRIPTION}</td>
+		<td style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+			{ICON_MOVE_UP_DISABLED}
+			{ICON_MOVE_DOWN_DISABLED}
+			{ICON_EDIT_DISABLED}
+			{ICON_DELETE_DISABLED}
+		</td>
+	</tr>
+<!-- ENDIF -->
+</tbody>
+</table>
+<div class="clearfix">&nbsp;</div>
+<form id="module" method="post">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="subscription_name" maxlength="30" /> 
+	<input class="button2" name="addsubscription" type="submit" value="{L_ACP_CREATE_SUBSCRIPTION}" />
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

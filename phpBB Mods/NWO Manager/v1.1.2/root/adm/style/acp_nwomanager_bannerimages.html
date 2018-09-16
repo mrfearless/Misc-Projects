@@ -1,0 +1,75 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_BANNERIMAGES}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_BANNERS}{L_ACP_NWOMANAGER_BANNERS}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="6"><a href="{U_ACP_NWOMANAGER_BANNERIMAGES}">{L_ACP_NWOMANAGER_BANNERIMAGES}</a></td>
+		</tr>
+		<tr>
+			<th width="10%">{L_ACP_NWOMANAGER_BANNER_NAME}</th>
+			<th width="50%">{L_ACP_NWOMANAGER_BANNER_IMAGE}</th>
+			<th width="15%">{L_ACP_NWOMANAGER_BANNER_LINK}</th>
+			<th width="15%">{L_ACP_NWOMANAGER_BANNER_DSC}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_BANNER_VISIBLE}</th>
+			<th width="5%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .banners -->
+		<!-- BEGIN banners -->
+		<!-- IF banners.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+
+			<td>{banners.BANNER_NAME}</td>
+			<td style="text-align: center; vertical-align: middle;">{banners.BANNER_IMAGE}</td>
+			<td>{banners.BANNER_LINK}</td>
+			<td>{banners.BANNER_DESC}</td>
+			<td><!-- IF banners.S_BANNER_VISIBLE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{banners.U_VISIBLE}"><!-- IF banners.S_BANNER_VISIBLE -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   		<!-- IF banners.S_FIRST_ROW && not banners.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{banners.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not banners.S_FIRST_ROW && not banners.S_LAST_ROW-->
+					<a href="{banners.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					<a href="{banners.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF banners.S_LAST_ROW && not banners.S_FIRST_ROW -->
+					<a href="{banners.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{banners.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{banners.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END banners -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_BANNERS}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+
+<div class="clearfix">&nbsp;</div>
+
+<form id="addbanner" method="post" action="{U_ACTION}">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="bannername" maxlength="30" />
+	<input class="button2" name="addbanner" type="submit" value="{L_ACP_NWOMANAGER_ADD_BANNER}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

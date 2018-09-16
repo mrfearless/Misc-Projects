@@ -1,0 +1,74 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_DONATIONS}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_TRANSACTIONS}{L_ACP_NWOMANAGER_TRANSACTIONS}</p>
+<!-- //<form id="filterlog" method="post" action="{U_ACTION}">
+	<fieldset>
+	<p>{L_ACP_NWOMANAGER_LOGFILTER}<select name="logfilterserver">{LOG_FILTERSERVER}</select> <select name="logfiltercategory">{LOG_FILTERCATEGORY}</select> <select name="logfiltertype">{LOG_FILTERTYPE}</select>
+	<input class="button2" type="submit" value="{L_ACP_NWOMANAGER_FILTER}" name="dofilter" />
+	<input class="button2" type="submit" value="{L_ACP_NWOMANAGER_RESETFILTER}" name="resetfilter" />
+	<input class="button2" name="addlog" type="submit" value="{L_ACP_NWOMANAGER_ADD_LOGENTRY}" /></p>
+	</fieldset>
+</form>-->
+
+
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+<!-- IF PAGINATION -->
+<div class="pagination">
+		<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span>
+</div>
+<!-- ENDIF -->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="5"><a href="{U_ACP_NWOMANAGER_DONATIONS}">{L_ACP_NWOMANAGER_DONATIONS}</a></td>
+		</tr>
+		<tr>
+			<th width="20%" >{L_ACP_NWOMANAGER_DONATIONS_DONORNAME}</th>
+			<th width="20%" >{L_ACP_NWOMANAGER_DONATIONS_DONOREMAIL}</th>
+			<th width="20%" >{L_ACP_NWOMANAGER_DONATIONS_DONORAMOUNT}</th>
+			<th width="20%" >{L_ACP_NWOMANAGER_DONATIONS_DONORPAYSTATUS}</th>
+			<th width="20%" >{L_ACP_NWOMANAGER_DONATIONS_DONORDATE}</th>
+			<!-- //<th width="5%" >Action</th> -->
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .transactions -->
+		<!-- BEGIN transactions -->
+		<!-- IF transactions.S_ROW_COUNT is even --><tr class="row1" style="vertical-align: top;"><!-- ELSE --><tr class="row2" style="vertical-align: top;"><!-- ENDIF -->
+			<td>{transactions.DONOR_NAME}</td>
+			<td>{transactions.DONOR_EMAIL}</td>
+			<td>{transactions.DONOR_AMOUNT}</td>
+			<td>{transactions.DONOR_PAYSTATUS}</td>
+			<td>{transactions.DONOR_DATE}</td>
+			<!-- //<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{transactions.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{transactions.U_DELETE}">{ICON_DELETE}</a></td> -->
+		</tr>
+		<!-- END transactions -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_TRANSACTIONS}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+<!-- IF PAGINATION -->
+<div class="pagination">
+		<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span>
+</div>
+<!-- ENDIF -->
+<!-- //<form id="addlog" method="post" action="{U_ACTION}">
+<fieldset class="quick" style="float: left;">
+	<input class="button2" name="addlog" type="submit" value="{L_ACP_NWOMANAGER_ADD_LOGENTRY}" />
+</fieldset>
+
+</form> -->
+
+<!-- INCLUDE overall_footer.html -->

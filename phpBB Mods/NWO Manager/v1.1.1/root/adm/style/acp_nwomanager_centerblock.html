@@ -1,0 +1,42 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{CENTERBLOCK_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_CENTERBLOCK_DESC}</p><!--<a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a> -&gt; {CAT_TITLE}</p>-->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%"><a href="{U_ACP_NWOMANAGER_CENTERBLOCKS}">{L_ACP_NWOMANAGER_CENTERBLOCKS}</a> -&gt; {CNTR_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_CENTERBLOCK}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_centerblock" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="centertitle">{L_ACP_NWOMANAGER_CENTERBLOCK_TITLE}:</label><br /><span>{L_ACP_NWOMANAGER_CENTERBLOCK_TITLE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="centertitle" type="text" size=30 value="{CENTER_TITLE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="centertext">{L_ACP_NWOMANAGER_CENTERBLOCK_TEXT}:</label><br /><span>{L_ACP_NWOMANAGER_CENTERBLOCK_TEXT_EXPLAIN}</span></dt>
+			<dd><textarea name="centertext" rows="16" class="inputbox" style="width: 99%;">{CENTER_TEXT}</textarea></dd>
+		</dl>
+		<dl>
+			<dt><label for="centervisible">{L_ACP_NWOMANAGER_CENTERBLOCK_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_CENTERBLOCK_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="centervisible" value="1"<!-- IF S_CENTER_VISIBLE --> id="centervisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="centervisible" value="0"<!-- IF not S_CENTER_VISIBLE --> id="centervisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

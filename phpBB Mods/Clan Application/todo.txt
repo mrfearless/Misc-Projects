@@ -1,0 +1,159 @@
+ToDo
+
+Clan App will collect following info from user submitting application:
+
+- username
+- user_id
+- steamid
+
+
+Form will contain the following questions:
+
+This is the application form for NewWorldOrder Clan Membership. Please read the following before making your application.
+
+New World Order is a community clan and does not recruit based on skill. As a result applications may take some time as we like to get to know a candidate and vice versa.
+So with that in mind, the minimum we look for is someone who will be active on the forums, active in-game, has a good laugh, enjoys chatting to all the regulars and clan members and generally is a top person. If you meet these requirements and more then of course we will be looking at your application and perhaps we may ask you to join us on a trial basis.
+
+
+[APP_REQUIREMENTS]
+Requirements for application:
+
+- Have posted an introduction to yourself on our forums.
+- Participated on the NewWorldOrder forums.
+- Played on the NewWorldOrder gameservers.
+- Are currently clanless.
+- Age 18 or over.
+- Have a public steam community page
+- Have never used hacks or cheats of any type.
+- Never been vacbanned on a previous account.
+- Not listed in steambans for any offences.
+
+[APP_ADDITIONALREQS]
+Additional factors:
+
+Whilst the points listed above are the bare minimum requirements for consideration, other factors will be taken into account, that will ultimately deside your applications result:
+
+- Forums: Has the applicant has demonstrated a willingness to participate regularly on the NewWorldOrder forums?
+- Communications: Has the applicant make every effort to get to know and communicated with other clan members via Steam, MSN, Teamspeak, and/or Ventrillo?
+- GameServers: Has the applicant been a regular player, had a good gaming attitude and helped other players and server administrators?
+- Participation: Has the applicant shown a willingness to join/arrange/helped with community events?
+- Attitude: Has the applicant shown that they are mature, respectful of others on the forums and gameservers?
+
+[APP_PROCESS]
+Application Process:
+
+An application once submitted with be reviewed by the Senior members of NewWorldOrder. This may take some time, so please be patient.
+Any ommissions or untruths on your application will result in the application being rejected.
+
+The application has four status levels:
+- Failure: Application has been closed due to ommissions in the application or other information supplied that was not truthful.
+- Rejected: Application has been unsuccesfull at this time. You can re-apply again after 1 month, should you wish to do so.
+- Pending: Application is being evaluated, no decision has been made on the application's result.
+- Approved: Application has been approved and candidate begins Trial Membership.
+- Success: Application has been succesful and is made a full member of NewWorldOrder.
+
+[APP_TRIAL]
+Trial Membership:
+
+If your application has been approved you will be invited to begin Trial Membership with NewWorldOrder.
+
+Trial periods will typically last for two to four weeks - but could be longer at our discretion. Trial members are held to a higher standard during this time, than orderinary forum members or gamerserver players.
+During your trial period your activity will be closely monitored and evaluated. At the end of the trial period one of three things may happen:
+
+- Trail is extended for further evaluation.
+- Ratified as a full member of NewWorldOrder.
+- Trial status is revoked and application is closed.
+
+Players on trial must wear the [тя] tag at the end of their name at all times.
+
+[APP_NOTE]
+
+New World Order is a community clan and does not recruit based on skill. As a result applications may take some time as we like to get to know a candidate and vice versa.
+If you feel you meet the requirements and more, Click Continue to begin the application process, where you will be asked to answer a number of questions.
+Failure to answer all the questions may result in your application being rejected.
+
+[Continue]
+
+--------------------------------------------------------------
+
+phpbb_appreq table
+ - req_id
+ - reqdesc
+
+Form to view, add, edit, delete, hide/show, move up and down requirements
+
+
+phpbb_appstatus table
+ - status_id
+ - status
+ - statusdesc
+
+Form to add, edit, delete application statuses
+
+
+phpbb_applications table
+ - app_id
+ - app_date
+ - app_user_id
+ - app_username
+ - app_status
+ - app_rejectnote
+ - app_failurenote
+ - app_approvenote
+ - app_successnote
+ - app_usernote
+
+
+ Form to view, edit, and filter view by status
+
+ Form to change status of user
+
+--------------------------------------------------------------
+
+Username: [prefilled in]
+Steam ID: [prefilled in if exists]
+Own headset?
+
+Donate?
+Activity level of:
+
+Community Events
+Forum Usage
+Gameserver Usage
+Communications Usage
+
+Games Interest In:
+
+L4D
+TF2
+CSS
+INSURGENCY
+AOC
+COD4
+COD5
+
+etc
+etc
+
+App reason
+App other notes
+
+Total Posts
+Joined Date
+-------------------------------------------------------------
+
+Add sent pm msg on status change
+add pm msg field
+
+reapply field
+days since last reapply or 0
+
+app table has previous app counter
+
+reuse existing application? if under a certain date/time or another field?
+
+app exist logic desc app_date - get last app and check re-apply field
+if reapply allowed, check app_date vs current date - diff in days vs reapply days
+if over days, then add new app
+if under days display sorry no can do. tell user they can reapply in x days?
+

@@ -1,0 +1,20 @@
+	<form id="user_afkmanager" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_ACP_USER_AFKMANAGER_SETTINGS}</legend>
+	<dl> 
+		<dt><label for="afkstatus">{L_ACP_USER_AFKSTATUS}:</label></dt>
+		<dd><label><input type="radio" class="radio" name="afkstatus" value="1"<!-- IF AFKSTATUS --> id="afkstatus" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="afkstatus" value="0"<!-- IF not AFKSTATUS --> id="afkstatus" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+	<dl> 
+		<dt><label for="afkreasoncategoryselect">{L_ACP_USER_AFKREASONCATEGORY}:</label></dt>
+		<dd><select name="afkreasoncategoryselect" id="afkreasoncategoryselect"{AFKREASONCATEGROIES}></select>
+	</dl>	
+	</fieldset>
+
+	<fieldset class="quick">
+		<input class="button1" type="submit" name="update" value="{L_SUBMIT}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+
+	</form>

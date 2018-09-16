@@ -1,0 +1,134 @@
+<!-- INCLUDE overall_header.html -->
+<div class="panel">
+   <div class="inner"><span class="corners-top"><span></span></span>
+
+   
+   
+   <div class="content">
+      
+	  <p>
+	  
+		{$CA_BLOCK_START}
+		{$CA_CAP2_START}{PAGE_TITLE}{$CA_CAP2_END}
+		<table class="tablebg" width="100%" cellspacing="{$CA_SPACING}">
+		<tr>
+			<th nowrap="nowrap" width="5%"></th>
+			<th nowrap="nowrap" width="5%">#</th>
+			<th nowrap="nowrap" width="15%">{L_USERNAME}</th>
+			<th nowrap="nowrap" width="15%">{L_STEAMID}</th>
+			<!-- // <th nowrap="nowrap" width="20%">{L_VACSTATUS}</th> -->
+			<th nowrap="nowrap" width="12%">{L_PM}</th>
+			<th nowrap="nowrap" width="15%">{L_ADDTOFRIENDS}</th>
+		</tr>
+
+	  
+		<!-- BEGIN nwodirectors -->
+			<!-- IF nwodirectors.S_FIRST_ROW -->
+			<tr>
+				<td class="row3" colspan="6"><b class="gensmall">{L_NWODIRECTORS}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			
+			<!-- IF nwodirectors.S_ROW_COUNT is even --><tr class="row2"><!-- ELSE -->	<tr class="row1"><!-- ENDIF -->
+			<td class="gen row" align="center"><img src="{nwodirectors.IMG_NWO_DIRECTOR_AVATAR}" alt=""></td>
+			<td class="gen row" align="center">&nbsp;{nwodirectors.ROW_NUMBER}&nbsp;</td>
+			<td class="genmed row" align="center" nowrap="nowrap"><a href="{nwodirectors.U_VIEW_PROFILE}">{nwodirectors.NWO_DIRECTOR_NAME}</a></td>
+			<td class="gen row" align="center"><!-- IF nwodirectors.U_NWO_DIRECTOR_FRIENDID --><a href="{nwodirectors.U_NWO_DIRECTOR_FRIENDID}">{nwodirectors.NWO_DIRECTOR_STEAMID}</a><!-- ELSE -->{nwodirectors.NWO_DIRECTOR_STEAMID}</td><!-- ENDIF -->
+			
+			<td class="gen row" align="center">&nbsp;<!-- IF nwodirectors.U_PM --><a href="{nwodirectors.U_PM}">{PM_IMG}</a><!-- ENDIF -->&nbsp;</td>
+			<td class="gen row" align="center">&nbsp;<!-- IF nwodirectors.U_NWO_DIRECTOR_ADDFRIEND --><a href="{nwodirectors.U_NWO_DIRECTOR_ADDFRIEND}">Add Friend</a><!-- ENDIF -->&nbsp;</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" colspan="6" align="center">
+					<span class="gen">{L_NO_DIRECTORS}></span>
+				</td>
+			</tr>	
+		<!-- END nwodirectors -->
+
+		<!-- BEGIN nwocouncil -->
+			<!-- IF nwocouncil.S_FIRST_ROW -->
+			<tr>
+				<td class="row3" colspan="6"><b class="gensmall">{L_NWOCOUNCIL}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			
+			<!-- IF nwocouncil.S_ROW_COUNT is even --><tr class="row2"><!-- ELSE -->	<tr class="row1"><!-- ENDIF -->
+			<td class="gen row" align="center"><img src="{nwocouncil.IMG_NWO_COUNCIL_AVATAR}" alt=""></td>
+			<td class="gen row" align="center">&nbsp;{nwocouncil.ROW_NUMBER}&nbsp;</td>
+			<td class="genmed row" align="center" nowrap="nowrap"><a href="{nwocouncil.U_VIEW_PROFILE}">{nwocouncil.NWO_COUNCIL_NAME}</a></td>
+			<td class="gen row" align="center"><a href="{nwocouncil.U_NWO_COUNCIL_FRIENDID}">{nwocouncil.NWO_COUNCIL_STEAMID}</a></td>
+
+			<td class="gen row" align="center">&nbsp;<!-- IF nwocouncil.U_PM --><a href="{nwocouncil.U_PM}">{PM_IMG}</a><!-- ENDIF -->&nbsp;</td>
+			<td class="gen row" align="center">&nbsp;<!-- IF nwocouncil.U_NWO_COUNCIL_ADDFRIEND --><a href="{nwocouncil.U_NWO_COUNCIL_ADDFRIEND}">Add Friend</a><!-- ENDIF -->&nbsp;</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" colspan="6" align="center">
+					<span class="gen">{L_NO_COUNCIL}></span>
+				</td>
+			</tr>	
+		<!-- END nwocouncil -->
+		
+		<!-- BEGIN nwomember -->
+			<!-- IF nwomember.S_FIRST_ROW -->
+			<tr>
+				<td class="row3" colspan="6"><b class="gensmall">{L_NWOMEMBERS}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			
+			<!-- IF nwomember.S_ROW_COUNT is even --><tr class="row2"><!-- ELSE -->	<tr class="row1"><!-- ENDIF -->
+			<td class="gen row" align="center"><img src="{nwomember.IMG_NWO_MEMBER_AVATAR}" alt=""></td>
+			<td class="gen row" align="center">&nbsp;{nwomember.ROW_NUMBER}&nbsp;</td>
+			<td class="genmed row" align="center" nowrap="nowrap"><a href="{nwomember.U_VIEW_PROFILE}">{nwomember.NWO_MEMBER_NAME}</a></td>
+			<td class="gen row" align="center"><!-- IF nwomember.U_NWO_MEMBER_FRIENDID --><a href="{nwomember.U_NWO_MEMBER_FRIENDID}">{nwomember.NWO_MEMBER_STEAMID}</a><!-- ELSE -->{nwomember.NWO_MEMBER_STEAMID}<!-- ENDIF --></td>
+
+			<td class="gen row" align="center">&nbsp;<!-- IF nwomember.U_PM --><a href="{nwomember.U_PM}">{PM_IMG}</a><!-- ENDIF -->&nbsp;</td>
+			<td class="gen row" align="center">&nbsp;<!-- IF nwomember.U_NWO_MEMBER_ADDFRIEND --><a href="{nwomember.U_NWO_MEMBER_ADDFRIEND}">Add Friend</a><!-- ENDIF -->&nbsp;</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" colspan="6" align="center">
+					<span class="gen">{L_NO_MEMBERS}></span>
+				</td>
+			</tr>	
+		<!-- END nwomember -->		
+
+		<!-- BEGIN nwotrial -->
+			<!-- IF nwotrial.S_FIRST_ROW -->
+			<tr>
+				<td class="row3" colspan="6"><b class="gensmall">{L_NWOTRIAL}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			
+			<!-- IF nwotrial.S_ROW_COUNT is even --><tr class="row2"><!-- ELSE -->	<tr class="row1"><!-- ENDIF -->
+			<td class="gen row" align="center"><img src="{nwotrial.IMG_NWO_TRIAL_AVATAR}" alt=""></td>
+			<td class="gen row" align="center">&nbsp;{nwotrial.ROW_NUMBER}&nbsp;</td>
+			<td class="genmed row" align="center" nowrap="nowrap"><a href="{nwotrial.U_VIEW_PROFILE}">{nwotrial.NWO_TRIAL_NAME}</a></td>
+			<td class="gen row" align="center"><a href="{nwotrial.U_NWO_TRIAL_FRIENDID}">{nwotrial.NWO_TRIAL_STEAMID}</a></td>
+
+			<td class="gen row" align="center">&nbsp;<!-- IF nwotrial.U_PM --><a href="{nwotrial.U_PM}">{PM_IMG}</a><!-- ENDIF -->&nbsp;</td>
+			<td class="gen row" align="center">&nbsp;<!-- IF nwotrial.U_NWO_TRIAL_ADDFRIEND --><a href="{nwotrial.U_NWO_TRIAL_ADDFRIEND}">Add Friend</a><!-- ENDIF -->&nbsp;</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" colspan="6" align="center">
+					<span class="gen">{L_NO_TRIAL}></span>
+				</td>
+			</tr>	
+		<!-- END nwotrial -->		
+		
+			<tr>
+				<td class="cat" colspan="6" align="center"></td>
+			</tr>		
+		</table>
+		{$CA_BLOCK_END}
+	  
+	  </p>
+   
+   </div>
+
+   <span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

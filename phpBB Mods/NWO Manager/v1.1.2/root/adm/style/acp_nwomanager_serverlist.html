@@ -1,0 +1,87 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_SERVERLIST}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_SERVERS}{L_ACP_NWOMANAGER_SERVERS}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="11"><a href="{U_ACP_NWOMANAGER_SERVERLIST}">{L_ACP_NWOMANAGER_SERVERLIST}</a></td>
+		</tr>
+		<tr>
+			<th width="20%">{L_ACP_NWOMANAGER_SERVER_NAME}</th>
+			<!-- //<th width="20%">{L_ACP_NWOMANAGER_SERVER_DESCRIPTION}</th> -->
+			<th width="15%">{L_ACP_NWOMANAGER_SERVER_IP}</th>
+			<th width="12%">{L_ACP_NWOMANAGER_SERVER_MAP}</th>
+			<th width="6%">{L_ACP_NWOMANAGER_SERVER_TYPE}</th>
+			<th width="10%">{L_ACP_NWOMANAGER_SERVER_ADMINMOD}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_SERVER_PRIVATE}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_SERVER_HLX}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_SERVER_SOURCEBANS}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_SERVER_SBSRC}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_SERVER_VISIBLE}</th>
+			<th width="5%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .servers -->
+		<!-- BEGIN servers -->
+		<!-- IF servers.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+
+			<td>{servers.SERVER_NAME}</td>
+			<!-- //<td>{servers.SERVER_DESCRIPTION}</td> -->
+			<td>{servers.SERVER_IP}</td>
+			<td>{servers.SERVER_MAP}</td>
+			<td>{servers.SERVER_TYPE}</td>
+			<td>{servers.SERVER_ADMINMOD}</td>
+			<td><!-- IF servers.S_SERVER_PRIVATE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td><!-- IF servers.S_SERVER_HLSTATSX -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td><!-- IF servers.S_SERVER_SOURCEBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td><!-- IF servers.S_SERVER_STEAMBANS -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td><!-- IF servers.S_SERVER_VISIBLE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{servers.U_VISIBLE}"><!-- IF servers.S_SERVER_VISIBLE -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   		<!-- IF servers.S_FIRST_ROW && not servers.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{servers.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not servers.S_FIRST_ROW && not servers.S_LAST_ROW-->
+					<a href="{servers.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					<a href="{servers.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF servers.S_LAST_ROW && not servers.S_FIRST_ROW -->
+					<a href="{servers.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{servers.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{servers.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END servers -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_SERVERS}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+
+<div class="clearfix">&nbsp;</div>
+
+<form id="addserver" method="post" action="{U_ACTION}">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="servername" maxlength="30" />
+	<input class="button2" name="addserver" type="submit" value="{L_ACP_NWOMANAGER_ADD_SERVER}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

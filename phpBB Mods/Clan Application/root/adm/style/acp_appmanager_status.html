@@ -1,0 +1,46 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_APPMANAGER_STATUS}</h1>
+<p><a href="{U_ACP_APPMANAGER_STATUS}">{L_ACP_APPMANAGER_STATUS}</a> -&gt; {L_ACP_APPMANAGER_STATUS}</p>
+<form id="appmanager_status" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="statusvalue">{L_ACP_APPMANAGER_STATUS_VALUE}</label><br /><span>{L_ACP_APPMANAGER_STATUS_VALUE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="2" name="statusvalue" type="text" size=10 value="{STATUS_VALUE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="statustitle">{L_ACP_APPMANAGER_STATUS_TITLE}</label><br /><span>{L_ACP_APPMANAGER_STATUS_TITLE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="statustitle" type="text" size=30 value="{STATUS_TITLE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="statustext">{L_ACP_APPMANAGER_STATUS_TEXT}</label><br /><span>{L_ACP_APPMANAGER_STATUS_TEXT_EXPLAIN}</span></dt>
+			<dd><textarea name="statustext"" rows="5" class="inputbox" style="width: 99%;">{STATUS_TEXT}</textarea></dd>
+		</dl>
+		<dl>
+			<dt><label for="statuscolor">{L_ACP_APPMANAGER_STATUS_COLOR}</label><br /><span>{L_ACP_APPMANAGER_STATUS_COLOR_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="6" name="statuscolor" type="text" size=10 value="{STATUS_COLOR}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="statusreapply">{L_ACP_APPMANAGER_STATUS_REAPPLY}</label><br /><span>{L_ACP_APPMANAGER_STATUS_REAPPLY_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="statusreapply" value="1"<!-- IF S_STATUS_REAPPLY --> id="statusreapply" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="statusreapply" value="0"<!-- IF not S_STATUS_REAPPLY --> id="statusreapply" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="sectionpm">{L_ACP_APPMANAGER_STATUS_PM}</label><br /><span>{L_ACP_APPMANAGER_STATUS_PM_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="statuspm" value="1"<!-- IF S_STATUS_PM --> id="statuspm" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="statuspm" value="0"<!-- IF not S_STATUS_PM --> id="statuspm" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="statuspmmsg">{L_ACP_APPMANAGER_STATUS_PMMSG}</label><br /><span>{L_ACP_APPMANAGER_STATUS_PMMSG_EXPLAIN}</span></dt>
+			<dd><textarea name="statuspmmsg"" rows="5" class="inputbox" style="width: 99%;">{STATUS_PMMSG}</textarea></dd>
+		</dl>
+	</fieldset>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+<form id="{SUBSCRIPTION_ACTION}" action="{SUBSCRIPTION_SUBMIT}" method="post">
+<h1>{SUBSCRIPTION_TITLE}</h1>
+<p>{SUBSCRIPTION_TEXT}</p>
+<fieldset>
+	<legend>{L_ACP_SUBSCRIPTION_LEGEND}</legend>
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_NAME_TITLE}:</label></dt>
+			<dd><label><input name="username" type="text" size="30" maxlength="30" value="{NAME_VALUE}" /></label></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_REGDATE_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_REGDATE_EXPLAIN}</span></dt>
+			<dd><label><input name="regdate" type="text" size="30" maxlength="30" value="{SUBSCRIPTION_REGDATE}" /></label></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_INITIALPAY_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_INITIALPAY_EXPLAIN}</span></dt>
+			<dd><label><input name="paymentinitial" type="text" size="30" maxlength="30" value="{SUBSCRIPTION_INITIALPAY}" /></label></dd>
+		</dl>	
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_CYCLE_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_CYCLE_EXPLAIN}</span></dt>
+			<dd><label><select name="paymentcyclecats" value="1" >{SUBSCRIPTION_CYCLE}</select></label></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_AMOUNT_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_AMOUNT_EXPLAIN}</span></dt>
+			<dd><label><input name="paymentamount" type="text" size="30" maxlength="30" value="{SUBSCRIPTION_AMOUNT}" /></label></dd>
+		</dl>		
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_NEXTDATE_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_NEXTDATE_EXPLAIN}</span></dt>
+			<dd><label><input name="paymentnextdate" type="text" size="30" maxlength="30" value="{SUBSCRIPTION_NEXTDATE}" /></label></dd>
+		</dl>			
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_OVERDUE_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_OVERDUE_EXPLAIN}</span></dt>
+			<dd><label><input name="paymentoverdue" type="radio" value="1" {OVERDUE_CHECKED_YES} class="radio" /> {L_YES}</label><label><input name="paymentoverdue" type="radio" value="0" {OVERDUE_CHECKED_NO} class="radio" /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SUBSCRIPTION_STATUS_TITLE}:</label><br><span>{L_ACP_SUBSCRIPTION_STATUS_EXPLAIN}</span></dt>
+			<dd><label><select name="accountstatus" value="1" >{SUBSCRIPTION_STATUS}</select></label></dd>
+		</dl>			
+</fieldset>
+<fieldset class="submit-buttons">
+	<legend>{L_SUBMIT}</legend>
+	<input type="submit" value="{L_SUBMIT}" name="submit" id="submit" class="button1"/>&nbsp;
+	<input type="submit" value="{L_CANCEL}" name="cancelsubscription" class="button2"/>
+</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

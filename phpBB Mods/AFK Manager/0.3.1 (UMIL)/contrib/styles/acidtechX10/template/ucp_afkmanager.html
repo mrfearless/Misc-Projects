@@ -1,0 +1,50 @@
+<!-- INCLUDE ucp_header.html -->
+<style type="text/css">
+#save-done-msg {padding: 5px; border: solid 1px #FFF;}
+</style>
+{$CA_BLOCK_START}
+{$CA_CAP2_START}{L_UCP_AFKMANAGER}{$CA_CAP2_END}
+<table class="tablebg" width="100%" cellspacing="{$CA_SPACING}">
+<!-- IF ERROR -->
+	<tr>
+		<td class="row3" colspan="2" align="center"><span class="gensmall error">{ERROR}</span></td>
+	</tr>
+<!-- ENDIF -->
+<!-- IF S_SAVE_DONE --><p id="save-done-msg" align="center"><span class="genmed">{L_UCP_AFKMANAGER_CHANGED} </strong><!-- IF S_AUTO_POST -->A New Auto Post Has Been Created To Tell Everyone You Are Now AFK <br /><a href={AFKER_TOPIC_LINK}>Click Here To View Your AFK Auto Post</a></p><!-- ENDIF --><!-- ENDIF -->
+
+<tr>
+	<td class="row1" colspan="4" align="center"><span class="genmed">{L_UCP_AFKMANAGER_EXPLAIN}</span></td>
+</tr>
+	<tr>
+		<th colspan="4">AFK Manager Settings</th>
+	</tr>
+<tr>
+	<td class="row1" width="55%"><b class="genmed">{L_UCP_AFKMANAGER_AFKSTATUS}</b><br /><span class="gensmall">{L_UCP_AFKMANAGER_AFKSTATUS_EXPLAIN}</span></td>
+	<td class="row2"><input type="radio" class="radio" name="AFKSTATUS" value="1"<!-- IF S_AFKSTATUS --> checked="checked"<!-- ENDIF --> /><span class="gen">{L_YES}</span>&nbsp; &nbsp;<input type="radio" class="radio" name="AFKSTATUS" value="0"<!-- IF not S_AFKSTATUS --> checked="checked"<!-- ENDIF --> /><span class="gen">{L_NO}</span></td>
+</tr>
+<tr>
+	<td class="row1" width="55%"><b class="genmed">{L_UCP_AFKMANAGER_REASON}</b><br /><span class="gensmall">{L_UCP_AFKMANAGER_REASON_EXPLAIN}</span</td>
+	<td class="row2"><input maxlength="44" name="AFKREASON" type="text" size=66 value="{AFKREASON}" class="inputbox autowidth"/></td>
+</tr>
+<tr>
+	<td class="row1" width="55%"><b class="genmed">{L_UCP_AFKMANAGER_REASONCATEGORY}</b><br /><span class="gensmall">{L_UCP_AFKMANAGER_REASONCAT_EXPLAIN}</span></td>
+	<td class="row2"><select name="afkreasoncategoryselect" id="lang">{AFKREASONCATEGORIES}</select></td>
+</tr>
+<tr>
+	<td colspan="2" class="spacer"></td>
+</tr>
+<tr>
+	<td class="row1" width="55%"><b class="genmed">{L_UCP_AFKMANAGER_PMMSG}</b><br /><span class="gensmall">{L_UCP_AFKMANAGER_PMMSG_EXPLAIN}</span></td>
+	<td class="row2"><textarea id="autopostmsg" name="AFKPMMSG" rows="3" cols="45">{AFKPMMSG}</textarea></td>
+</tr>
+<tr>
+	<td class="row1" width="55%"><b class="genmed">{L_UCP_AFKMANAGER_AUTOAFK}</b><br /><span class="gensmall">{L_UCP_AFKMANAGER_AUTOAFK_EXPLAIN}</span></td>
+	<td class="row2"><input maxlength="4" name="AFKAUTODAYS" type="text" size=4 value="{AFKAUTODAYS}" class="inputbox autowidth" /></td>
+</tr>
+<tr>
+	<td class="cat" colspan="2" align="center">{S_HIDDEN_FIELDS}<input class="btnmain" type="submit" name="ucp-afkmanager-status" value="{L_UCP_AFKMANAGER_CHANGE}" />&nbsp;&nbsp;<input class="btnlite" type="reset" value="{L_RESET}" name="reset" /></td>
+</tr>
+</table>
+{$CA_BLOCK_END}
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl" ?>
+<!--
+	NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.
+-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+<header>
+	<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25" />
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<title lang="en">AFK Manager Mod</title>
+	<description lang="en">The Away From Keyboard (AFK) Manager Mod allows users to toggle their AFK status, submit an AFK reason and an automatic post to a specific forum (defined by admin in the ACP) all from their own supplied AFK Manager UCP module.</description>
+	<author-notes lang="en">List of features included with AFK Manager
+
+User Features:
+
+- AFK Status: On/Off
+- AFK Reason: Select from a list the reason for being AFK
+- Auto Post Message: If Auto Posting is enabled, custom message will be posted into a forum (defined by Admin) to alert other users as to the users AFK status and reason.
+- Reminder on main forum page at the top, to let the user know they have marked their AFK status to on. This is only shown if the user has the required permission to use the UCP.
+- AFK status in viewprofile below user rank to let other users know the user is AFK.
+
+Admin Features:
+
+- Auto Post: If Auto Post is enabled, users custom message will be posted to a forum defined by Auto Post Forum ID setting. If Auto Post is disabled, no message will be posted.
+- Auto Post Forum ID: Select form a list of forums the forum that is to contain the AFK Auto Posts (If Auto Post is enabled)
+- Auto Post Topic Icon: Select a topic icon to use with the Auto Post feature.
+- Auto Post Reply: If enabled (and Auto Post is enabled), a user toggling their status back from AFK will Auto Post a reply to their Auto Post AFK topic, telling other users they have returned from being AFK. If disabled (and Auto Post is enabled), a user toggling their status back from AFK will post a New Post telling others they have returned from being AFK.
+- Auto Post Footer: Custom text that admin can define to be appended to the AFK Auto Post.
+- AFK User List: A table that shows the current users that have toggled their AFK status, the date they went AFK, how long they have been AFK, their chosen AFK reason and their AFK Auto Post ID (If Auto Post is enabled)
+- Permissions are required to use/view AFK Manager UCP module, AFK User List module and AFK Settings module.
+- User AFK Viewtopic: If a user is marked as AFK, enabling this option this will show 'User Is Currently AFK' when viewing a forum topic that the user has posted in.
+- User AFK Viewprofile: If a user is marked as AFK, enabling this option will show 'User Is Currently AFK' when viewing the users profile.
+- User AFK Reminder: If a user is marked as AFK, this will show a reminder at the top of the main forum page only to the AFK user.</author-notes>
+	<author-group>
+		<author>
+			<realname>-[Nwo]- fearless</realname>
+			<username>-[Nwo]- fearless</username>
+			<homepage>www.NewWorldOrder.org.uk</homepage>
+			<email>fearless@newworldorder.org.uk</email>
+		</author>
+	</author-group>
+	<mod-version>0.3.0</mod-version>
+	<installation>
+		<level>easy</level>
+		<time>300</time>
+		<target-version>3.0.5</target-version>
+	</installation>
+	<link-group>
+		<link type="parent" href="http://www.NewWorldOrder.org.uk/downloads/AFK_Manager_Mod.zip" lang="en">Download the latest version of AFK Manager Mod from here</link>
+	</link-group>
+</header>
+<action-group>
+	<copy>
+		<file from="root/adm/style/acp_afkmanager.html" to="adm/style/acp_afkmanager.html" />
+		<file from="root/adm/style/acp_afkmanager_settings.html" to="adm/style/acp_afkmanager_settings.html" />
+		<file from="root/includes/acp/acp_afkmanager.php" to="includes/acp/acp_afkmanager.php" />
+		<file from="root/includes/acp/info/acp_afkmanager.php" to="includes/acp/info/acp_afkmanager.php" />
+		<file from="root/includes/ucp/ucp_afkmanager.php" to="includes/ucp/ucp_afkmanager.php" />
+		<file from="root/includes/ucp/info/ucp_afkmanager.php" to="includes/ucp/info/ucp_afkmanager.php" />
+		<file from="root/install/*.*" to="install/*.*" />
+		<file from="root/language/en/mods/afkmanager.php" to="language/en/mods/afkmanager.php" />
+		<file from="root/language/en/mods/info_acp_afkmanager.php" to="language/en/mods/info_acp_afkmanager.php" />
+		<file from="root/language/en/mods/info_ucp_afkmanager.php" to="language/en/mods/info_ucp_afkmanager.php" />
+		<file from="root/language/en/mods/permissions_afkmanager.php" to="language/en/mods/permissions_afkmanager.php" />
+		<file from="root/styles/prosilver/template/ucp_afkmanager.html" to="styles/prosilver/template/ucp_afkmanager.html" />
+	</copy>
+	<open src="viewtopic.php">
+		<edit>
+			<comment lang="en"><![CDATA[This will show other users when viewing a topic that the user is currently marked as AFK. The text 'User Is Currently AFK' appears just below the users rank.]]></comment>
+			<find><![CDATA[	$poster_id = (int) $row['poster_id'];]]></find>
+			<action type="after-add"><![CDATA[	// AFK Manager Mod
+	$afkstatus = $config['afkmanager_afk_show_status_viewtopic'] ? $row['user_afkstatus'] : false;
+	// AFK Manager Mod]]></action>
+			<find><![CDATA[				'online'			=> false,]]></find>
+			<action type="after-add"><![CDATA[				// AFK Manager Mod
+				'afkstatus'			=> $afkstatus,
+				// AFK Manager Mod]]></action>
+			<find><![CDATA[				'online'		=> false,]]></find>
+			<action type="after-add"><![CDATA[				// AFK Manager Mod
+				'afkstatus'		=> $afkstatus,
+				// AFK Manager Mod]]></action>
+			<find><![CDATA[		'S_ONLINE'				=> ($poster_id == ANONYMOUS || !$config['load_onlinetrack']) ? false : (($user_cache[$poster_id]['online']) ? true : false),]]></find>
+			<action type="after-add"><![CDATA[		// AFK Manager Mod
+		'S_AFKSTATUS'			=> $user_cache[$poster_id]['afkstatus'] ? true : false,
+		// AFK Manager Mod]]></action>
+		</edit>
+	</open>
+	<open src="includes/functions.php">
+		<edit>
+			<comment lang="en"><![CDATA[This will remind the user on the main forum index page at the top, that they have set their AFK status to On. It will offer them a link to go straight to the AFK Manager UCP to change this status if they wish.]]></comment>
+			<find><![CDATA[		if ($user->data['user_unread_privmsg'] && $user->data['user_unread_privmsg'] != $user->data['user_new_privmsg'])
+		{
+			$l_message_unread = ($user->data['user_unread_privmsg'] == 1) ? $user->lang['UNREAD_PM'] : $user->lang['UNREAD_PMS'];
+			$l_privmsgs_text_unread = sprintf($l_message_unread, $user->data['user_unread_privmsg']);
+		}
+	}
+]]></find>
+			<action type="after-add"><![CDATA[	// AFK Manager Mod
+	$afkstatus = ($config['afkmanager_afk_show_reminder_board'] && $auth->acl_get('u_afk_view')) ? $user->data['user_afkstatus'] : false;
+	// AFK Manager Mod]]></action>
+			<find><![CDATA[		'PRIVATE_MESSAGE_INFO_UNREAD'	=> $l_privmsgs_text_unread,]]></find>
+			<action type="after-add"><![CDATA[		// AFK Manager Mod
+		'S_AFKSTATUS'					=> $afkstatus,
+		// AFK Manager Mod
+]]></action>
+			<find><![CDATA[		'U_MODCP'				=> append_sid("{$phpbb_root_path}mcp.$phpEx", false, true, $user->session_id),]]></find>
+			<action type="after-add"><![CDATA[		// AFK Manager Mod
+		'U_AFKMANAGER'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=afkmanager&amp;mode=afkstatus'),
+		// AFK Manager Mod]]></action>
+		</edit>
+	</open>
+	<open src="language/en/acp/common.php">
+		<edit>
+			<comment lang="en"><![CDATA[This edit is required to allow log entries in the admin ACP when a user changes their AFK status.]]></comment>
+			<find><![CDATA[));
+
+?>]]></find>
+			<action type="before-add"><![CDATA[	
+	// AFK Manager Mod
+	'LOG_USER_AFK_STATUS'		=> '<strong>User AFK status changed to: %1$s</strong><br />» %2$s',
+	// AFK Manager Mod]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/template/index_body.html">
+		<edit>
+			<comment lang="en"><![CDATA[This will remind the user on the main forum index page at the top, that they have set their AFK status to On. It will offer them a link to go straight to the AFK Manager UCP to change this status if they wish.]]></comment>
+			<find><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></find>
+			<action type="after-add"><![CDATA[<!-- IF S_AFKSTATUS --><p align=center><strong>You Are Currently Marked As AFK. To Change Your AFK Status <a href="{U_AFKMANAGER}"><em>Click Here</em></a></strong></p><!-- ENDIF -->]]></action>
+		</edit>
+	</open>
+	<open src="styles/prosilver/template/viewtopic_body.html">
+		<edit>
+			<comment lang="en"><![CDATA[This will show other users when viewing a topic that the user is currently marked as AFK. The text 'User Is Currently AFK' appears just below the users rank.]]></comment>
+			<find><![CDATA[			<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG --><dd>{postrow.RANK_TITLE}<!-- IF postrow.RANK_TITLE and postrow.RANK_IMG --><br /><!-- ENDIF -->{postrow.RANK_IMG}</dd><!-- ENDIF -->]]></find>
+			<action type="after-add"><![CDATA[			<!-- IF postrow.S_AFKSTATUS --><dd>User Is Currently AFK<br /></dd><!-- ENDIF -->]]></action>
+		</edit>
+	</open>
+	<diy-instructions lang="en">1. Copy over files.
+2. Go to install/index.php in your browser and install the AFK Manager Mod
+3. Make the required edits.
+4. Purge Cache.
+5. Refresh your templates/themes/imagesets.
+6. Delete the install folder after installation.</diy-instructions>
+</action-group>
+</mod>

@@ -1,0 +1,124 @@
+Top Menu Bar
+
+Sub Menu Bar
+
+
+Left Menu Bar: Main
+Left Menu Bar: Active Games
+Left Menu Bar: Community Links
+Left Menu Bar: Tools & Downloads
+
+Bottom Menu Bar
+Community Links
+Active Games
+
+
+
+Category For Menus
+
+Each category has options
+- Category Title (Only visible in ACP)
+- Category Text (Visible)
+- Position: Top, Left, Bottom, Right
+- Order: for specifying which comes first etc
+- Type: Text or Graphics
+
+
+Menu Items:
+- Menu Text
+- URL
+- Image Location (if empty using text only)
+
+
+Get top links
+
+sql for all that are cat position top order by cat order
+
+sql for all menu items that = category, order by menu order
+
+nested template loop that assign all in block
+
+
+Get left links
+
+sql for all that are cat position left order by cat order
+
+sql for all menu items that = category, order by menu order
+
+nested template loop that assign all in block
+
+
+Get bottom links
+
+sql for all that are cat position bottom, order by cat order
+
+sql for all menu items that = category, order by menu order
+
+nested template loop that assign all in block
+
+
+
+Get right links
+
+sql for all that are cat position right, order by cat order
+
+sql for all menu items that = category, order by menu order
+
+nested template loop that assign all in block
+
+submode is addcat, delcat, editcat, moveup, movedn, toggle view, viewcat, addmenu, delmenu, editmenu, moveup, movedn, toggle view,
+
+nwo_categories
+cat_id
+cat_title
+cat_text
+cat_visible
+cat_position
+cat_type
+cat_order
+
+nwo_menus
+menu_id
+menu_catid
+menu_text
+menu_url
+menu_visible
+menu_image
+menu_order
+
+
+
+deleting menu items
+
+Get total amount of menus to delete which are equal to  count(menu_catid)
+current count is count(menu_id)
+New total will be current count - deleted count
+
+loop all menu items
+if the menu order >
+
+
+7 records
+catid order
+1 1
+2 2
+1 3
+1 4
+2 5
+1 6
+2 7
+
+
+
+1 1
+1 3
+1 4
+1 6
+2 2
+2 5
+2 7
+
+deleting all that are catid = 2, have to reorder rest
+
+
+

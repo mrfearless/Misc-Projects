@@ -1,0 +1,79 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_LINKS}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_CATS}{L_ACP_NWOMANAGER_CATEGORYS}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="8"><a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a></td>
+		</tr>
+		<tr>
+			<!-- //<th width="5%" colspan="2"></th> -->
+			<th width="30%" colspan="2">{L_ACP_NWOMANAGER_CATEGORY_TITLE}</th>
+			<th width="30%">{L_ACP_NWOMANAGER_CATEGORY_TEXT}</th>
+			<th width="12%">{L_ACP_NWOMANAGER_CATEGORY_POSITION}</th>
+			<th width="12%">{L_ACP_NWOMANAGER_CATEGORY_TYPE}</th>
+			<th width="6%">{L_ACP_NWOMANAGER_CATEGORY_MENUS}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_CATEGORY_VISIBLE}</th>
+			<th width="5%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .categories -->
+		<!-- BEGIN categories -->
+		<!-- IF categories.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+
+			<td style="width: 5%; text-align: center;">{categories.CATEGORY_IMAGE}</td>
+			<td style="text-align: left;">{categories.CATEGORY_TITLE}</td>
+			<td>{categories.CATEGORY_TEXT}</td>
+			<td>{categories.CATEGORY_POSITION}</td>
+			<td>{categories.CATEGORY_TYPE}</td>
+			<td>{categories.CATEGORY_MENUS}</td>
+			<td><!-- IF categories.S_CATEGORY_VISIBLE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{categories.U_VISIBLE}"><!-- IF categories.S_CATEGORY_VISIBLE -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   		<!-- IF categories.S_FIRST_ROW && not categories.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{categories.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not categories.S_FIRST_ROW && not categories.S_LAST_ROW-->
+					<a href="{categories.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					<a href="{categories.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF categories.S_LAST_ROW && not categories.S_FIRST_ROW -->
+					<a href="{categories.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{categories.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{categories.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END categories -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_CATEGORIES}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+
+<div class="clearfix">&nbsp;</div>
+
+<form id="addcat" method="post">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="categorytitle" maxlength="30" />
+	<input class="button2" name="addcat" type="submit" value="{L_ACP_NWOMANAGER_ADD_CATEGORY}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

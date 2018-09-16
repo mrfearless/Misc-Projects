@@ -1,0 +1,73 @@
+Packages database
+
+package name
+package decription
+package cost
+package recurring cost (if not a one off cost)
+package recurring cycle (monthly, yearly etc)
+package discount (for buying in bulk cycles, 10%, 20% etc)
+
+
+examples:
+
+Widget Setup
+Setup and installation of widget service and the widget 2009 product
+€100
+0
+N/A
+N/A
+
+
+Member Subscription
+Membership subscription fee for being member of widget club
+€0
+€25
+Monthly
+10%
+
+buys membership for 6 months = 6 * 25 = €150 - (€150/100 * 10) = €150 - (€1.5 * 10) = €150 - €15 = €135
+
+
+Maintenance
+Quarterly maintenance of servers
+€0
+€30
+Quarterly
+20%
+
+buys for 6 months = 6/3(*quarterly months) = 2 * €30 - (€60/100 * 20) = €60 - (€.60 * 20) = €60 - €12 = €48
+
+
+to calculate costs
+
+user package table
+
+userid packageid usercycle nextdueamount
+1		1		 3				 buys maintenance for half year
+
+have to calculate diff in user cycle vs base cycle in package to update next payment amount
+
+get packageid, if usercycle > 0 (once off) look up package in package table
+
+get package, package cycle and compare
+
+if user cycle > package cycle then calc discount 
+	if package cycle = 1, mpackage = 1
+	if package cycle = 2, mpackage = 3
+	if package cycle = 3, mpackage = 6
+	we can get base package months from cycles probably
+	so we have package cycle in months vs users subscriped cycle in months
+	for maintence example
+	mpackage = 3, muser = 6
+	6/3 = 2
+	multiply that result by base package cost = €30
+	store result
+	get discount for package, if > 0
+	finalcost = result - (result/100 * discount)
+	store result in user subscription table for next due amount
+	
+	
+	
+adding a new package to users account
+by default we assume package cycle as default
+list of packages to select vs ones already added to account as like user forum permissions lists?

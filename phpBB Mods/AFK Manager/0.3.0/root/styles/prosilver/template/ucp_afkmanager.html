@@ -1,0 +1,55 @@
+<!-- INCLUDE ucp_header.html -->
+
+<style type="text/css">
+#mod_note {width: 98%; padding: 5px; border: 1px solid rgb(204, 204, 204); background-color: rgb(249, 255, 162); width: 95%;}
+#mod_note:focus {border: 1px solid #000;}
+#save-done-msg {padding: 5px; border: solid 1px #000;}
+</style>
+
+<h2>{L_UCP_AFKMANAGER}</h2>
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	
+	<div id="ucp-afkmanager">
+		<p>{L_UCP_AFKMANAGER_EXPLAIN}</p>
+			<!-- IF S_SAVE_DONE --><p id="save-done-msg"><strong>{L_UCP_AFKMANAGER_CHANGED} </strong><!-- IF S_AUTO_POST -->A New Auto Post Has Been Created To Tell Everyone You Are Now AFK <a href={AFKER_TOPIC_LINK}>Click Here To View Your AFK Auto Post</a></p><!-- ENDIF --><!-- ENDIF -->
+		
+		<p>
+		
+			<form action="{AFKSTATUS_PROCESSOR}" method="post">
+				<p>{L_UCP_AFKMANAGER_QUESTION}</p>
+				<!-- IF S_AFKSTATUS -->
+				Yes <Input type = 'Radio' Name ='AFKSTATUS' value= '1' checked/>
+				No <Input type = 'Radio' Name ='AFKSTATUS' value= '0'/>
+				<!-- ELSE -->
+				Yes <Input type = 'Radio' Name ='AFKSTATUS' value= '1'/>
+				No <Input type = 'Radio' Name ='AFKSTATUS' value= '0' checked/>
+				<!-- ENDIF -->
+				<p></p>
+				<span>
+					<p>{L_UCP_AFKMANAGER_REASON}</p>
+					<input maxlength="60" name="AFKREASON" type="text" size=50 value="{AFKREASON}" class="inputbox autowidth"/>
+				</span>
+				<P></p>
+				<span>
+					<p>{L_UCP_AFKMANAGER_REASONCATEGORY}</p>
+					<select name="afkreasoncategoryselect" {AFKREASONCATEGORIES}></select>
+				</span>
+				<P></p>
+				<span>
+					<p>{L_UCP_AFKMANAGER_PMMSG_EXPLAIN}</p>
+					<textarea id="afkpmmsg" name="AFKPMMSG" rows="5" cols="76">{AFKPMMSG}</textarea><br />
+				</span>
+				<P></p>
+				<span>
+					<input class="button1" type="submit" name="ucp-afkmanager-status" value="{L_UCP_AFKMANAGER_CHANGE}" />
+				</span>
+			</form>
+		</p>	
+	</div>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,36 @@
+<!-- INCLUDE overall_header.html -->
+<div class="panel">
+   <div class="inner"><span class="corners-top"><span></span></span>
+
+   <div class="content">
+      
+	  <p>
+	  
+		{$CA_BLOCK_START}
+		{$CA_CAP2_START}{PAGE_TITLE}{$CA_CAP2_END}
+ 		
+		<table  width="100%" cellspacing="{$CA_SPACING}">
+		<tr>
+			<td><br/><br/></td><td><br/><br/></td><td><br/><br/></td>
+		</tr>
+		<!-- BEGIN nwoadminlist -->
+			<!-- IF nwoadminlist.CELL_ID eq 1 --><tr><!-- ELSE --><!-- ENDIF -->	
+			
+			<td align="center" style="font-size:7pt;"><a href="{nwoadminlist.U_ADMIN_FRIENDID}"><!-- IF nwoadminlist.ADMIN_STEAMID --><img src="spimage.php?id={nwoadminlist.ADMIN_STEAMID}" alt="Steam Status"/></a><!-- ENDIF --><br/><br/><a href="{nwoadminlist.U_VIEW_PROFILE}" style="font-size:7pt;">{nwoadminlist.ADMIN_NAME}</a>&nbsp;-&nbsp;<a href="{nwoadminlist.U_ADMIN_ADDFRIEND}" style="font-size:7pt;">{nwoadminlist.ADMIN_STEAMID}</a>&nbsp;-&nbsp;<a href="{nwoadminlist.U_ADMIN_ADDFRIEND}" style="font-size:7pt;">Add Friend</a><br/><br/><br/></td>
+		
+			
+			<!-- IF nwoadminlist.CELL_ID eq 3 --></tr><!-- ELSE --><!-- ENDIF -->	
+			
+		<!-- END nwoadminlist -->
+
+		<!-- IF nwoadminlist.CELL_ID < 3 --></tr><!-- ELSE --><!-- ENDIF -->			
+		{$CA_BLOCK_END}
+		</table>  
+	  </p>
+   
+   </div>
+
+   <span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

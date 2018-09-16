@@ -1,0 +1,51 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{MENU_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_MENUITEM_DESC}</p><!-- //<a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a> -&gt; <a href="{U_BLOCK_TITLE}">{BLOCK_TITLE}</a> -&gt; {MENU_TITLE}-->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%"><a href="{U_ACP_NWOMANAGER_MENULINKS}">{L_ACP_NWOMANAGER_MENULINKS}</a> -&gt; <a href="{U_BLOCK_TITLE}">{BLOCK_TITLE}</a> -&gt; {MENU_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_MENUITEM}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_menu" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="menutext">{L_ACP_NWOMANAGER_MENUITEM_TEXT}:</label><br /><span>{L_ACP_NWOMANAGER_MENUITEM_TEXT_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="menutext" type="text" size=30 value="{MENU_TEXT}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="menuurl">{L_ACP_NWOMANAGER_MENUITEM_URL}:</label><br /><span>{L_ACP_NWOMANAGER_MENUITEM_URL_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="menuurl" type="text" size=90 value="{MENU_URL}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="menuimage">{L_ACP_NWOMANAGER_MENUITEM_IMAGE}:</label><br /><span>{L_ACP_NWOMANAGER_MENUITEM_IMAGE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="menuimage" type="text" size=90 value="{MENU_IMAGE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<!-- //<dl>
+			<dt><label for="menucatid">{L_ACP_NWOMANAGER_MENU_CATID}:</label><br /><span>{L_ACP_NWOMANAGER_MENU_CATID_EXPLAIN}</span></dt>
+			<dd><select name="menucatid">{MENU_CATID}</select></dd>
+		</dl> -->
+		<dl>
+			<dt><label for="menuvisible">{L_ACP_NWOMANAGER_MENUITEM_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_MENUITEM_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="menuvisible" value="1"<!-- IF S_MENU_VISIBLE --> id="menuvisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="menuvisible" value="0"<!-- IF not S_MENU_VISIBLE --> id="menuvisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

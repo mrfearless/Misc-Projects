@@ -1,0 +1,29 @@
+	<form id="user_afkmanager" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_ACP_USER_AFKMANAGER_SETTINGS}</legend>
+	<dl> 
+		<dt><label for="afkstatus">{L_ACP_USER_AFKSTATUS}:</label></dt>
+		<dd><label><input type="radio" class="radio" name="afkstatus" value="1"<!-- IF AFKSTATUS --> id="afkstatus" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="afkstatus" value="0"<!-- IF not AFKSTATUS --> id="afkstatus" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+	<dl> 
+		<dt><label for="afkdate">{L_ACP_USER_AFKDATE}:</label></dt>
+		<dd><label><input maxlength="19" name="afkdate" type="text" size=30 value="{AFKDATE}" class="inputbox autowidth"/></label><!-- IF not S_AFKDATEVALID --><br />Date Not Valid! Format Is: Y-m-d H:m:s<!-- ENDIF --></dd>
+	</dl>
+	<dl> 
+		<dt><label for="afkreason">{L_ACP_USER_AFKREASON}:</label></dt>
+		<dd><label><input maxlength="60" name="afkreason" type="text" size=30 value="{AFKREASON}" class="inputbox autowidth"/></label></dd>
+	</dl>
+	
+	<dl> 
+		<dt><label for="afkreasoncategoryselect">{L_ACP_USER_AFKREASONCATEGORY}:</label></dt>
+		<dd><select name="afkreasoncategoryselect" id="afkreasoncategoryselect"{AFKREASONCATEGROIES}></select>
+	</dl>	
+	</fieldset>
+
+	<fieldset class="quick">
+		<input class="button1" type="submit" name="update" value="{L_SUBMIT}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+
+	</form>

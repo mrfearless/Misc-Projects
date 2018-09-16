@@ -1,0 +1,69 @@
+<!-- INCLUDE overall_header.html -->
+<h1>{L_ACP_APPMANAGER_FORM}</h1>
+<p>{L_ACP_APPMANAGER_FORM_DESC}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+
+<table cellspacing="1">
+
+	<thead>
+		<tr>
+			<!-- //<th width="4%">{L_ACP_SECTION_ID}</th> -->
+			<th width="25%">{L_ACP_SECTION_TITLE}</th>
+			<th width="65%">{L_ACP_SECTION_TEXT}</th>
+			<!-- //<th width="5%">{L_ACP_SECTION_ORDER}</th>-->
+			<th width="8%">Action</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<!-- IF .appform -->
+    		<!-- BEGIN appform -->
+    			<!-- IF appform.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+    			<!-- //<td>{appform.SECTION_ID}</td> -->
+				<td>{appform.SECTION_TITLE}</td>
+				<td style="font-size:10px">{appform.SECTION_TEXT}</td> <!-- //  -->
+				<!--<td>{appform.SECTION_ORDER}</td>-->
+		   		<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+					<a href="{appform.U_DISPLAY}"><!-- IF appform.S_DISPLAY -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   			<!-- IF appform.S_FIRST_ROW && not appform.S_LAST_ROW -->
+						{ICON_MOVE_UP_DISABLED}
+						<a href="{appform.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF not appform.S_FIRST_ROW && not appform.S_LAST_ROW-->
+						<a href="{appform.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						<a href="{appform.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF appform.S_LAST_ROW && not appform.S_FIRST_ROW -->
+						<a href="{appform.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ELSE -->
+						{ICON_MOVE_UP_DISABLED}
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ENDIF -->
+					<a href="{appform.U_EDIT}">{ICON_EDIT}</a>
+					<a href="{appform.U_DELETE}">{ICON_DELETE}</a></td>
+				</tr>
+		   	<!-- END appform -->
+	    <!-- ELSE -->
+	    	<tr>
+	    		<td class="row3" colspan="5">{L_ACP_NO_SECTIONS}</td>
+	    	</tr>
+	    <!-- ENDIF -->
+	</tbody>
+</table>
+<div class="clearfix">&nbsp;</div>
+<form id="addsection" method="post">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="sectionname" maxlength="30" />
+	<input class="button2" name="addsection" type="submit" value="{L_ACP_CREATE_SECTION}" />
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

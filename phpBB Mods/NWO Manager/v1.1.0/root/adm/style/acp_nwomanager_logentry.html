@@ -1,0 +1,58 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{LOGENTRY_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_LOGENTRY_DESC}</p>
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3"><a href="{U_ACP_NWOMANAGER_LOGLIST}">{L_ACP_NWOMANAGER_LOGLIST}</a> -&gt; {LOGENTRY_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_LOGENTRY}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_logentry" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="logdatetime">{L_ACP_NWOMANAGER_LOGENTRY_DATETIME}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_DATETIME_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="19" name="logdatetime" type="text" size=30 value="{LOG_DATETIME}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="logserver">{L_ACP_NWOMANAGER_LOGENTRY_SERVER}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_SERVER_EXPLAIN}</span></dt>
+			<dd><select name="logserver">{LOG_SERVER}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="logadmin">{L_ACP_NWOMANAGER_LOGENTRY_ADMIN}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_ADMIN_EXPLAIN}</span></dt>
+			<dd><select name="logadmin">{LOG_ADMIN}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="logcategory">{L_ACP_NWOMANAGER_LOGENTRY_CATEGORY}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_CATEGORY_EXPLAIN}</span></dt>
+			<dd><select name="logcategory">{LOG_CATEGORY}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="logtype">{L_ACP_NWOMANAGER_LOGENTRY_TYPE}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_TYPE_EXPLAIN}</span></dt>
+			<dd><select name="logtype">{LOG_TYPE}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="logsummary">{L_ACP_NWOMANAGER_LOGENTRY_SUMMARY}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_SUMMARY_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="logsummary" type="text" size=90 value="{LOG_SUMMARY}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="lognotes">{L_ACP_NWOMANAGER_LOGENTRY_NOTES}:</label><br /><span>{L_ACP_NWOMANAGER_LOGENTRY_NOTES_EXPLAIN}</span></dt>
+			<dd><textarea name="lognotes" rows="8" class="inputbox" style="width: 99%;">{LOG_NOTES}</textarea></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

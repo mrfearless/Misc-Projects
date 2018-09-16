@@ -1,0 +1,901 @@
+/* Layout
+ ------------ */
+* {
+	/* Reset browsers default margin, padding and font sizes */
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 100%;
+}
+
+body {
+	/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size: 10px;
+	margin: 0;
+	width: 960px;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin:0px auto;
+	background-color: #1E2831;
+	background-image: url(images/back.png);
+	background-position: center bottom;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+#body-simple {
+	background: #0B0F11;
+	padding: 5px;
+}
+
+
+/* Misc stuff */
+img {
+	border: none;
+}
+
+.gen {
+	margin: 1px 1px;
+	font-size: 1.2em;
+}
+
+.genmed {
+	margin: 1px 1px;
+	font-size: 1.1em;
+}
+
+.gensmall {
+	margin: 1px 1px;
+	font-size: 1em;
+}
+
+.titles {
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 1.3em;
+	text-decoration: none;
+}
+
+.error, table td .error {
+	color: #cccccc;
+}
+
+.spacer {
+	background: #4A6786 url(images/th.gif) top left repeat-x;
+}
+
+hr	{ height: 0px; border: solid #2370B6 0px; border-top-width: 1px;}
+
+.pagination {
+	padding: 4px;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+/* Links
+ ------------ */
+a {
+	color: #8CBAE3;
+	text-decoration: none;
+}
+
+a:active,
+a:visited {
+	color: #4790D3;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+a.forumlink {
+	font-weight: bold;
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+
+a.topictitle {
+	margin: 1px 0px;
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+a.topictitle, .postbody a {
+	color: #2370B6;
+}
+a.topictitle:visited, .postbody a:visited {
+	color: #8CBAE3;
+}
+a.topictitle:visited:hover, .postbody a:visited:hover {
+	color: #2370B6;
+}
+a.topictitle:hover, .postbody a:hover {
+	color: #ffffff;
+}
+
+/* Header and logo */
+#maintable {
+	border-style: solid;
+	border-width: 0 1px 0px 1px;
+	border-color: #4A6786;
+
+}
+#logorow {
+	background: url(images/topleft.png) top left repeat-x;
+	text-align: left;
+	padding: 0;
+}
+
+#logo-left {
+	background: url(images/topleft.png) top left no-repeat;
+}
+#logo-right {
+	background: url(images/) top right no-repeat;
+}
+
+#logorow, #logo-left {
+	height: 279px;
+	overflow: hidden;
+}
+
+.pm-notify-new, .pm-notify-unread {
+	border-left: solid 1px #317FC5;
+	border-right: solid 1px #2370B6;
+	border-top: solid 1px #317FC5;
+	border-bottom: solid 1px #2370B6;
+	background: #0B0F11 url(images/cell.gif) top left repeat-x;
+	margin: 10px 0;
+	padding: 10px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+}
+.pm-notify-new a, .pm-notify-new a:visited, .pm-notify-unread a, .pm-notify-unread a:visited { text-decoration: underline; }
+.pm-notify-header {
+	margin-bottom: 10px;
+	color: #CCC;
+}
+.pm-notify-new, .pm-notify-unread:hover {
+	border-left: solid 1px #ffffff;
+	border-right: solid 1px #ffffff;
+	border-top: solid 1px #ffffff;
+	border-bottom: solid 1px #ffffff;
+}
+.pm-notify-new { padding: 30px; }
+
+/* Navigation buttons */
+.navrow {
+	background: #0B0F11 url(images/contentback.png) top left repeat-y;
+	height: 36px;
+	overflow: hidden;
+	border-bottom: solid 0px #4A6786;
+	border-top: solid 1px #4A6786;
+	color: #4A6786;
+	text-align: left;
+	font-size: 11px;
+	padding: 8px;
+}
+
+.toprow {
+
+	height: 1px;
+	overflow: hidden;
+	border-bottom: solid 0px #000;
+	border-top: solid 0px #000;
+	color: #000000;
+	text-align: left;
+	font-size: 11px;
+	padding: 0x;
+	
+	}
+	
+.topimage{
+
+height:70;
+width:700;
+
+}	
+
+* html .navrow { padding: 0; }
+.navrow b, .navrow strong { font-weight: normal; }
+.navrow a, .navrow a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+.navrow a:hover { 
+	color: #ffffff; 
+	text-decoration: underline; 
+}
+
+a.link-new, a.link-new:visited { color: #ffffff; }
+a.link-new:hover, a.link-new:visited:hover { color: #FFF; }
+
+/* Content and tables */
+#contentrow {
+	padding: 3px;
+	background: #0B0F11 url(images/contentback.png) top left repeat-y;
+}
+
+.tablebg {
+	border: solid 0px #000; 
+	background: #0B0F11 url(images/cell.gif) top left repeat-x;
+}
+
+.row1, .legend, .forumrules, tr.row1 , .row, .postbottom {
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+		border-bottom: solid 0px #0B0F11;
+	background: #294154 url(images/cell.gif) top left repeat-x;
+	padding: 7px;
+}
+.row2, tr.row2   {
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+	border-bottom: solid 0px #0B0F11;
+	background: #1F3242 url(images/cell2.gif) top left repeat-x;
+	padding: 7px;
+}
+.row3, tr.row3{
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+	background: #1F3242;
+	padding: 7px;
+}
+th {
+	color: #CCDFF0; 
+	font-size: 11px; 
+	font-weight: bold;
+	background: #4A6786 url(images/th.gif) top left repeat-x;
+	white-space: nowrap;
+	padding: 0 5px;
+	text-align: center;
+	height: 26px;
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+	border-bottom: solid 1px #0B0F11;
+}
+th a, th a:visited {
+	color: #CCDFF0 !important;
+	text-decoration: underline;
+}
+th a:hover {
+	color: #FFF;
+	text-decoration: underline;
+}
+
+td {
+	padding: 2px;
+}
+td.profile {
+	padding: 8px;
+}
+.catdiv {
+	height: 24px;
+	padding: 0 3px;
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+	border-bottom: solid 0px #4A6786;
+	background: url(images/cathead.png) top left repeat-x;
+}
+.rtl .catdiv {
+	background: url(images/cathead.png) top left repeat-x;
+}
+
+.cat {
+	height: 24px;
+	padding: 0 3px;
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 2px #0B0F11;
+	border-bottom: solid 0px #4A6786;
+	background: url(images/cathead.png) top left repeat-x;
+	text-indent: 4px;
+}
+.cathead {
+	background: #26629A url(images/catbottom.gif) top left repeat-x;
+	height: 24px;
+	padding: 1px 3px;
+	border-left: solid 1px #0B0F11;
+	border-right: solid 1px #0B0F11;
+	border-top: solid 1px #0B0F11;
+	border-bottom: solid 1px #0B0F11;
+}
+
+
+/* Table header */
+caption, .cap-div {
+	margin: 0;
+	background: url(images/hdr_mid.png) top left repeat-x;
+	white-space: nowrap;
+	height: 27px;
+	text-align: left;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 25;
+	width: 900;
+}
+.cap-left {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #1E1E1E;	
+}
+.cap-right {
+	
+	padding-top: 8px;
+	height: 19px;
+		border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #1E1E1E;	
+}
+caption, caption h1, caption h2, caption h3, caption h4, caption span,
+.cap-div, .cap-div h1, .cap-div h2, .cap-div h3, .cap-div h4, .cap-div span { 
+	font-size: 11px;
+	font-weight: bold;
+	color: #3285D0;
+}
+caption h1, caption h2, caption h3, caption h4, caption span,
+.cap-div h1, .cap-div h2, .cap-div h3, .cap-div h4, .cap-div span { 
+	display: inline;
+}
+caption a, caption a:visited, .cap-div a, .cap-div a:visited {
+	color: #3285D0;
+	text-decoration: underline;
+}
+caption a:hover, .cap-div a:hover {
+	color: #D0D0D0;
+	text-decoration: underline;
+}
+
+
+/* The following are part of the calendar mod.
+   They follow the same format as the reply-icon, post-icon, locked-icon, pmreply-icon, newpm-icon, and forwardpm-icon.
+   If you are trying to implement a style other then prosilver, look at how your existing style defines
+   those icons, and do the same for the new calendar icons.
+*/
+.calendar-new-icon span    { background: transparent none 0 0 no-repeat; }
+.calendar-day-icon span    { background: transparent none 0 0 no-repeat; }
+.calendar-week-icon span   { background: transparent none 0 0 no-repeat; }
+.calendar-month-icon span  { background: transparent none 0 0 no-repeat; }
+
+/* The following are part of the calendar mod.
+   They follow the same format as the reply-icon, post-icon, locked-icon, pmreply-icon, newpm-icon, and forwardpm-icon.
+   If you are trying to implement a style other then prosilver, look at how your existing style defines
+   those icons, and do the same for the new calendar icons.
+   
+   Note the "text-align: left" was added because there were a few instances where the icons were cut in half... 
+   adding the text align property helps reserve enough space to fully display the icon.
+*/
+.buttons div.calendar-new-icon	{ width: {IMG_BUTTON_CALENDAR_NEW_WIDTH}px; height: {IMG_BUTTON_CALENDAR_NEW_HEIGHT}px; text-align: left; }
+.buttons div.calendar-day-icon	{ width: {IMG_BUTTON_CALENDAR_DAY_WIDTH}px; height: {IMG_BUTTON_CALENDAR_DAY_HEIGHT}px; text-align: left; }
+.buttons div.calendar-week-icon	{ width: {IMG_BUTTON_CALENDAR_WEEK_WIDTH}px; height: {IMG_BUTTON_CALENDAR_WEEK_HEIGHT}px; text-align: left; }
+.buttons div.calendar-month-icon	{ width: {IMG_BUTTON_CALENDAR_MONTH_WIDTH}px; height: {IMG_BUTTON_CALENDAR_MONTH_HEIGHT}px; text-align: left; }
+
+ul.profile-icons li.edit-all-icon	{ width: {IMG_ICON_CALENDAR_EDIT_ALL_WIDTH}px; height: {IMG_ICON_CALENDAR_EDIT_ALL_HEIGHT}px; }
+ul.profile-icons li.delete-all-icon	{ width: {IMG_ICON_CALENDAR_DELETE_ALL_WIDTH}px; height: {IMG_ICON_CALENDAR_DELETE_ALL_HEIGHT}px; }
+
+/* The following are part of the calendar mod.
+   They follow the same format as the reply-icon, post-icon, locked-icon, pmreply-icon, newpm-icon, and forwardpm-icon.
+   If you are trying to implement a style other then prosilver, look at how your existing style defines
+   those icons, and do the same for the new calendar icons.
+*/
+.calendar-new-icon span 	{ background-image: url("{IMG_BUTTON_CALENDAR_NEW_SRC}") ;}
+.calendar-day-icon span     { background-image: url("{IMG_BUTTON_CALENDAR_DAY_SRC}") ;}
+.calendar-week-icon span    { background-image: url("{IMG_BUTTON_CALENDAR_WEEK_SRC}") ;}
+.calendar-month-icon span   { background-image: url("{IMG_BUTTON_CALENDAR_MONTH_SRC}") ;}
+
+.edit-all-icon, .edit-all-icon a			{ background-image: url("{IMG_ICON_CALENDAR_EDIT_ALL_SRC}"); }
+.delete-all-icon, .delete-all-icon a			{ background-image: url("{IMG_ICON_CALENDAR_DELETE_ALL_SRC}"); }
+
+
+/* Footer */
+#wrapfooter {
+	text-align: center;
+	color: #CCC;
+	padding-top: 10px;
+}
+
+.copyright {
+	color: #888;
+	font-weight: normal;
+	font-size: 9px;
+	line-height: 1.2em;
+}
+.copyright a, .copyright a:visited {
+	color: #AAA;
+	text-decoration: underline;
+}
+.copyright a:hover { color: #FFF; }
+
+
+/* Breadcrumbs */
+p.breadcrumbs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	color: #AAA;
+	font-weight: bold;
+	white-space: normal;
+	font-size: 1em;
+}
+.rtl p.breadcrumbs {
+	float: right;
+}
+
+p.datetime {
+	margin: 0;
+	padding: 0;
+	float: right;
+	white-space: nowrap;
+	font-size: 1em;
+}
+
+.rtl p.datetime {
+	float: left;
+}
+
+/* Index/viewforum */
+.subforum.read {
+	background: url(images/sub_old.gif) top left no-repeat;
+	padding-left: 11px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+.subforum.unread { 
+	background: url(images/sub_new.gif) top left no-repeat;
+	padding-left: 11px;
+    padding-bottom: 20px;
+	padding-top: 20px;
+}
+.legend {
+	text-align: center;
+	margin: 0 auto;
+	padding: 2px;
+}
+.legend-viewforum { 
+	margin: 0; 
+	text-align: left; 
+}
+
+.forumrules {
+	padding: 4px;
+	font-weight: normal;
+	font-size: 1.1em;
+	border-left-color: #AAA;
+	border-top-color: #AAA;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+.forumrules h3 {
+	color: #0B0F11;
+}
+
+/* Post */
+.postsubject {
+	font-size: 9px;
+	font-weight: bold;
+	color: #ffffff;
+}
+td.postbottom { 
+	background: #1D303F url(images/profile.gif) top left repeat-x; 
+	font-size: 9px;
+	color: #D0D0D0;
+	white-space: nowrap;
+	padding: 7px;
+	vertical-align: middle;
+}
+td.postbuttons {
+	padding-top: 9px;
+	background-position: center;
+}
+.postdetails { 
+	color: #CCC;
+	font-size: 10px; 
+	text-align: left;
+}
+.postdetails b {
+	color: #DDD;
+}
+.posterrank		{ font-size: 9px; color: #B0B0B0; }
+.posterprofile	{ font-size: 10px; color: #D0D0D0; }
+
+.postauthor {
+	color: #8CBAE3;
+	font-size: 10px;
+	margin-bottom: 3px;
+	font-weight: bold;
+}
+.postonline { margin-bottom: 2px; }
+
+.postreported, .postreported a:visited, .postreported a:hover, .postreported a, .postreported a:active {
+	margin: 1px 0px;
+	color: #0B0F11;
+	font-weight: bold;
+}
+
+.postapprove, .postapprove a:visited, .postapprove a:hover, .postapprove a, .postapprove a:active {
+	color: #00FF00;
+	font-weight: bold;
+}
+
+.postapprove img, .postreported img {
+	vertical-align: bottom;
+}
+
+.postbody {
+	font-size: 12px;
+	line-height: 1.4em;
+	margin-top: 14px;
+	margin-right: 0;
+	margin-bottom: 3px;
+	margin-left: 0;
+}
+.signature {
+	font-size: 10px;
+	color: #CCCCCC;
+	margin-top: 10px;
+}
+.signature .line { color: #AAA; }
+
+.postbody li, ol, ul {
+	margin: 0 0 0 1.5em;
+}
+
+.rtl .postbody li, .rtl ol, .rtl ul {
+	margin: 0 1.5em 0 0;
+}
+
+.posthilit {
+	background-color: #2370B6;
+}
+
+.postsubject {
+	font-size: 9px;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.postbody a { text-decoration: underline; }
+
+/* UCP */
+.folder-current a, .folder-current a:visited {
+	color: #FFF;
+	font-weight: bold;
+}
+.folder-current a:hover { color: #ffffff; }
+
+td.pm_marked_colour { background: #0B0F11; }
+td.pm_marked_colour_left { border-left: solid 3px #0B0F11; padding-left: 2px; }
+td.pm_marked_colour_right { border-right: solid 3px #0B0F11; padding-right: 2px; }
+
+td.pm_replied_colour { background: #2370B6; }
+td.pm_replied_colour_left { border-left: solid 3px #2370B6; padding-left: 2px; }
+td.pm_replied_colour_right { border-right: solid 3px #2370B6; padding-right: 2px; }
+
+td.pm_friend_colour { background: #007700; }
+td.pm_friend_colour_left { border-left: solid 3px #007700; padding-left: 2px; }
+td.pm_friend_colour_right { border-right: solid 3px #007700; padding-right: 2px; }
+
+td.pm_foe_colour { background: #DD0000; }
+td.pm_foe_colour_left { border-left: solid 3px #DD0000; padding-left: 2px; }
+td.pm_foe_colour_right { border-right: solid 3px #DD0000; padding-right: 2px; }
+
+
+/* Form Elements
+ ------------ */
+form {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+textarea, select, .post, .btnbbcode, .btnmain, .btnlite, .btnfile, .helpline {
+	font-weight: normal;
+	font-family: "Lucida Grande", Verdana, Helvetica, sans-serif;
+	color: #D0D0D0;
+	border: 1px solid #2370B6;
+	background-color: #222;
+}
+
+input {
+	font-size: 1.1em;
+	padding: 1px;
+}
+textarea {
+	font-size: 1.3em; 
+	line-height: 1.4em;
+	padding: 2px;
+}
+select {
+	font-size: 1.1em;
+	padding: 1px;
+}
+
+option {
+	padding: 0 1em 0 0;
+}
+
+.rtl option {
+	padding: 0 0 0 1em;
+}
+
+.post {
+	border-style: solid;
+	border-width: 1px;
+}
+
+.btnbbcode {
+	font-size: 1.1em;
+	border: 1px solid #444;
+}
+.btnbbcode:hover {
+	border-color: #999;
+	color: #FFF;
+}
+
+.btnmain {
+	font-weight: bold;
+	cursor: pointer;
+	padding: 1px 5px;
+	font-size: 1.1em;
+}
+
+.btnlite {
+	font-weight: normal;
+	cursor: pointer;
+	padding: 1px 5px;
+	font-size: 1.1em;
+}
+
+.btnfile {
+	font-weight: normal;
+	padding: 1px 5px;
+	font-size: 1.1em;
+}
+
+.helpline {
+	background-color: transparent;
+	color: #AAA;
+	border-style: none;
+}
+#helpline { color: #AAA; }
+
+* html textarea, * html select, * html .post, * html .btnmain, * html .btnlite, * html .btnfile {
+	border-color: #D0D0D0;
+}
+textarea:hover, select:hover, .post:hover, .btnmain:hover, .btnlite:hover, .btnfile:hover {
+	border-color: #D0D0D0;
+}
+textarea:focus, select:focus, .post:focus, .btnmain:focus, .btnlite:focus, .btnfile:focus {
+	border-color: #0B0F11; 
+	color: #FFF;
+}
+
+label:hover { 
+	color: #ffffff; 
+}
+
+/* BBCode
+ ------------ */
+.quotetitle, .attachtitle, .codetitle {
+	margin: 10px 5px 0px 5px;
+	padding: 2px 4px;
+	border: solid 1px #090909;
+	color: #D0D0D0;
+	background-color: #2E2E2E;
+	font-size: 0.85em;
+	font-weight: bold;
+}
+
+.quotetitle .quotetitle {
+	font-size: 1em;
+}
+
+.quotecontent, .attachcontent {
+	margin: 0px 5px 10px 5px;
+	padding: 5px;
+	border-color: #090909;
+	border-width: 0px 1px 1px 1px;
+	border-style: solid;
+	font-weight: normal;
+	font-size: 1em;
+	line-height: 1.4em;
+/*	font-family: "Lucida Grande", "Trebuchet MS", Helvetica, Arial, sans-serif; */
+	background-color: #2E2E2E;
+	color: #EEE;
+}
+
+.attachcontent {
+	font-size: 0.85em;
+}
+
+.codecontent {
+	direction: ltr;
+	margin: 0px 5px 10px 5px;
+	padding: 5px;
+	border-color: #090909;
+	border-width: 0px 1px 1px 1px;
+	border-style: solid;
+	font-weight: normal;
+	font-size: 11px;
+	font-family: Monaco, 'Courier New', monospace;
+	background-color: #2E2E2E;
+	color: #EEE;
+}
+
+.quotewrapper, .codewrapper, .attachwrapper {
+	clear: both;
+	margin: 10px 5px;
+	background: #2671B6 url(images/code_header.gif) top left no-repeat;
+	padding-left: 19px;
+	border: solid 1px #090909;
+}
+.quotewrapper { background-image: url(images/quote_header.gif); }
+.quotewrapper .quotetitle, .codewrapper .codetitle, .attachwrapper .attachtitle { 
+	margin: 0; 
+	border-width: 0 0 1px 1px;
+}
+.quotewrapper .quotecontent, .codewrapper .codecontent, .attachwrapper .attachcontent {
+	margin: 0; 
+	border-width: 0 0 0 1px;
+}
+.attachcontent, html>body .postbody {
+	overflow: auto;
+	overflow-x: auto;
+}
+
+.syntaxbg {
+	color: #FFF;
+}
+
+.syntaxcomment {
+	color: #AAA;
+}
+
+.syntaxdefault {
+	color: #FFF;
+}
+
+.syntaxhtml {
+	color: #FFF;
+}
+
+.syntaxkeyword {
+	color: #cccccc;
+}
+
+.syntaxstring {
+	color: #2370B6;
+}
+
+
+/* More misc stuff */
+h1 {
+	font-family: "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+	font-weight: bold;
+	font-size: 1.8em;
+	text-decoration: none;
+}
+
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 1.5em;
+	text-decoration: none;
+	line-height: 120%;
+}
+
+h3 {
+	font-size: 1.3em;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 120%;
+}
+
+h4 {
+	margin: 0px;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+p {
+	font-size: 1.1em;
+}
+
+p.moderators {
+	margin: 0px;
+	float: left;
+	color: #CCC;
+	font-weight: bold;
+}
+
+.rtl p.moderators {
+	float: right;
+}
+
+p.linkmcp {
+	margin: 0px;
+	float: right;
+	white-space: nowrap;
+}
+
+.rtl p.linkmcp {
+	float: left;
+}
+
+p.searchbar {
+	padding: 2px 0;
+	white-space: nowrap;
+} 
+
+p.searchbarreg {
+	margin: 0px;
+	float: right;
+	white-space: nowrap;
+}
+
+.rtl p.searchbarreg {
+	float: left;
+}
+
+p.forumdesc {
+	padding-bottom: 4px;
+}
+
+p.topicauthor {
+	margin: 1px 0px;
+}
+
+p.topicdetails {
+	margin: 1px 0px;
+}
+td.history-current, tr.row1 td.history-current, tr.row2 td.history-current {
+	background: #444;
+}
+
+table.colortable td {
+	padding: 0;
+}
+
+pre {
+	font-size: 1.1em;
+	font-family: Monaco, 'Courier New', monospace;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.username-coloured {
+	font-weight: bold;
+}
+
+.sep {
+	color: #888;
+}
+
+@import url("medals.css");
+
+/* bugs */
+@media all and (min-width: 0px)
+{
+	/* reset file input style for Opera - it changes only text color and border, but not bg color */
+	.btnfile, .btnfile:hover, .btnfile:focus { 
+		border: none; 
+		background-color: #FFF;
+		color: #000;
+	}
+
+}

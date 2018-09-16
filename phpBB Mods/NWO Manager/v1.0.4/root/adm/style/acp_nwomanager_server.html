@@ -1,0 +1,79 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{SERVER_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_SERVER_DESC}</p>
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3"><a href="{U_ACP_NWOMANAGER_SERVERLIST}">{L_ACP_NWOMANAGER_SERVERLIST}</a> -&gt; {SERVER_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_SERVER}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_server" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="servername">{L_ACP_NWOMANAGER_SERVER_NAME}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_NAME_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="servername" type="text" size=30 value="{SERVER_NAME}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="serverdescription">{L_ACP_NWOMANAGER_SERVER_DESCRIPTION}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_DESCRIPTION_EXPLAIN}</span></dt>
+			<dd><input maxlength="255" name="serverdescription" type="text" size=90 value="{SERVER_DESCRIPTION}" class="inputbox autowidth"/></dd>
+		</dl>
+		<dl>
+			<dt><label for="serverip">{L_ACP_NWOMANAGER_SERVER_IP}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_IP_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="21" name="serverip" type="text" size=30 value="{SERVER_IP}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="serverip">{L_ACP_NWOMANAGER_SERVER_MAP}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_MAP_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="servermap" type="text" size=30 value="{SERVER_MAP}" class="inputbox autowidth"/></label></dd>
+		</dl>		
+		<dl>
+			<dt><label for="servertype">{L_ACP_NWOMANAGER_SERVER_TYPE}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_TYPE_EXPLAIN}</span></dt>
+			<dd><select name="servertype">{SERVER_TYPE}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="serveradminmod">{L_ACP_NWOMANAGER_SERVER_ADMINMOD}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_ADMINMOD_EXPLAIN}</span></dt>
+			<dd><select name="serveradminmod">{SERVER_ADMINMOD}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="serverprivate">{L_ACP_NWOMANAGER_SERVER_PRIVATE}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_PRIVATE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="serverprivate" value="1"<!-- IF S_SERVER_PRIVATE --> id="serverprivate" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="serverprivate" value="0"<!-- IF not S_SERVER_PRIVATE --> id="serverprivate" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="serverhlstatsx">{L_ACP_NWOMANAGER_SERVER_HLSTATSX}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_HLSTATSX_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="serverhlstatsx" value="1"<!-- IF S_SERVER_HLSTATSX --> id="serverhlstatsx" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="serverhlstatsx" value="0"<!-- IF not S_SERVER_HLSTATSX --> id="serverhlstatsx" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="serversourcebans">{L_ACP_NWOMANAGER_SERVER_SOURCEBANS}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_SOURCEBANS_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="serversourcebans" value="1"<!-- IF S_SERVER_SOURCEBANS --> id="serversourcebans" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="serversourcebans" value="0"<!-- IF not S_SERVER_SOURCEBANS --> id="serversourcebans" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="serversteambans">{L_ACP_NWOMANAGER_SERVER_STEAMBANS}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_STEAMBANS_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="serversteambans" value="1"<!-- IF S_SERVER_STEAMBANS --> id="serversteambans" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="serversteambans" value="0"<!-- IF not S_SERVER_STEAMBANS --> id="serversteambans" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="servervisible">{L_ACP_NWOMANAGER_SERVER_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_SERVER_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="servervisible" value="1"<!-- IF S_SERVER_VISIBLE --> id="servervisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="servervisible" value="0"<!-- IF not S_SERVER_VISIBLE --> id="servervisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>		
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

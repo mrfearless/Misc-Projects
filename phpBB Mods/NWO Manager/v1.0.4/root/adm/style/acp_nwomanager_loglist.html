@@ -1,0 +1,78 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_NWOMANAGER_LOGLIST}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_LOGENTRIES}{L_ACP_NWOMANAGER_LOGENTRIES}</p>
+<form id="filterlog" method="post" action="{U_ACTION}">
+	<p>{L_ACP_NWOMANAGER_LOGFILTER}<select name="logfiltercategory">{LOG_FILTERCATEGORY}</select> <select name="logfiltertype">{LOG_FILTERTYPE}</select>
+	<input class="button2" type="submit" value="{L_ACP_NWOMANAGER_FILTER}" name="dofilter" />
+	<input class="button2" type="submit" value="{L_ACP_NWOMANAGER_RESETFILTER}" name="resetfilter" />
+	<input class="button2" name="addlog" type="submit" value="{L_ACP_NWOMANAGER_ADD_LOGENTRY}" /></p>
+</form>
+
+
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+<!-- IF PAGINATION -->
+<div class="pagination">
+		<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span>
+</div>
+<!-- ENDIF -->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="8"><a href="{U_ACP_NWOMANAGER_LOGLIST}">{L_ACP_NWOMANAGER_LOGLIST}</a></td>
+		</tr>
+		<tr>
+			<th width="5%" >{L_ACP_NWOMANAGER_LOGENTRY_DATETIME}</th>
+			<!-- //<th width="20%">{L_ACP_NWOMANAGER_SERVER_DESCRIPTION}</th> -->
+			<th width="10%" >{L_ACP_NWOMANAGER_LOGENTRY_SERVER}</th>
+			<th width="7%" >{L_ACP_NWOMANAGER_LOGENTRY_ADMIN}</th>
+			<th width="7%" >{L_ACP_NWOMANAGER_LOGENTRY_CATEGORY}</th>
+			<th width="7%" >{L_ACP_NWOMANAGER_LOGENTRY_TYPE}</th>
+			<th width="15%" >{L_ACP_NWOMANAGER_LOGENTRY_SUMMARY}</th>
+			<th width="44%" >{L_ACP_NWOMANAGER_LOGENTRY_NOTES}</th>
+			<th width="5%" >Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .logs -->
+		<!-- BEGIN logs -->
+		<!-- IF logs.S_ROW_COUNT is even --><tr class="row1" style="vertical-align: top;"><!-- ELSE --><tr class="row2" style="vertical-align: top;"><!-- ENDIF -->
+			<td style="font-size:10px">{logs.LOG_DATETIME}</td>
+			<td style="font-size:10px">{logs.LOG_SERVER}</td>
+			<td style="font-size:10px">{logs.LOG_ADMIN}</td>
+			<td style="font-size:10px">{logs.LOG_CATEGORY}</td>
+			<td style="font-size:10px">{logs.LOG_TYPE}</td>
+			<td style="font-size:10px">{logs.LOG_SUMMARY}</td>
+			<td style="font-size:10px">{logs.LOG_NOTES}</td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{logs.U_NEW}">{ICON_NEW}</a>
+				<a href="{logs.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{logs.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END logs -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_LOGENTRIES}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+<!-- IF PAGINATION -->
+<div class="pagination">
+		<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span>
+</div>
+<!-- ENDIF -->
+<form id="addlog" method="post" action="{U_ACTION}">
+<fieldset class="quick" style="float: left;">
+	<input class="button2" name="addlog" type="submit" value="{L_ACP_NWOMANAGER_ADD_LOGENTRY}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

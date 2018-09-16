@@ -1,0 +1,50 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{CATEGORY_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_CATEGORY_DESC}</p><!--<a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a> -&gt; {CAT_TITLE}</p>-->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%"><a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a> -&gt; {CAT_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_CATEGORY}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_category" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="categorytitle">{L_ACP_NWOMANAGER_CATEGORY_TITLE}:</label><br /><span>{L_ACP_NWOMANAGER_CATEGORY_TITLE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="categorytitle" type="text" size=30 value="{CATEGORY_TITLE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="categorytext">{L_ACP_NWOMANAGER_CATEGORY_TEXT}:</label><br /><span>{L_ACP_NWOMANAGER_CATEGORY_TEXT_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="categorytext" type="text" size=30 value="{CATEGORY_TEXT}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="categoryposition">{L_ACP_NWOMANAGER_CATEGORY_POSITION}:</label><br /><span>{L_ACP_NWOMANAGER_CATEGORY_POSITION_EXPLAIN}</span></dt>
+			<dd><select name="categoryposition">{CATEGORY_POSITION}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="categorytype">{L_ACP_NWOMANAGER_CATEGORY_TYPE}:</label><br /><span>{L_ACP_NWOMANAGER_CATEGORY_TYPE_EXPLAIN}</span></dt>
+			<dd><select name="categorytype">{CATEGORY_TYPE}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="categoryvisible">{L_ACP_NWOMANAGER_CATEGORY_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_CATEGORY_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="categoryvisible" value="1"<!-- IF S_CATEGORY_VISIBLE --> id="categoryvisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="categoryvisible" value="0"<!-- IF not S_CATEGORY_VISIBLE --> id="categoryvisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
+<head>
+<!-- INCLUDE ca_config.html -->
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="2002-2006 phpBB Group" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{META}
+<title>{SITENAME} - <!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{PAGE_TITLE}</title>
+
+<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css" />
+
+</head>
+<body class="{S_CONTENT_DIRECTION}">
+
+<div class="panel">
+   <div class="inner"><span class="corners-top"><span></span></span>
+
+   <div class="content">
+      
+	  <p>
+	  
+		{$CA_BLOCK_START}
+		{$CA_CAP2_START}{PAGE_TITLE}{$CA_CAP2_END}
+ 		
+		<table  width="100%" cellspacing="{$CA_SPACING}">
+		<tr>
+			<td><br/><br/></td><td><br/><br/></td><td><br/><br/></td>
+		</tr>
+		<!-- BEGIN nwoadminlist -->
+			<!-- IF nwoadminlist.CELL_ID eq 1 --><tr><!-- ELSE --><!-- ENDIF -->	
+			
+			<td align="center" style="font-size:7pt;"><a href="{nwoadminlist.U_ADMIN_FRIENDID}"><!-- IF nwoadminlist.ADMIN_STEAMID --><img src="spimage.php?id={nwoadminlist.ADMIN_STEAMID}" alt="Steam Status"/></a><!-- ENDIF --><br/><br/><a href="{nwoadminlist.U_VIEW_PROFILE}" style="font-size:7pt;">{nwoadminlist.ADMIN_NAME}</a>&nbsp;-&nbsp;<a href="{nwoadminlist.U_ADMIN_ADDFRIEND}" style="font-size:7pt;">{nwoadminlist.ADMIN_STEAMID}</a>&nbsp;-&nbsp;<a href="{nwoadminlist.U_ADMIN_ADDFRIEND}" style="font-size:7pt;">Add Friend</a><br/><br/><br/></td>
+		
+			
+			<!-- IF nwoadminlist.CELL_ID eq 3 --></tr><!-- ELSE --><!-- ENDIF -->	
+			
+		<!-- END nwoadminlist -->
+
+		<!-- IF nwoadminlist.CELL_ID < 3 --></tr><!-- ELSE --><!-- ENDIF -->			
+		{$CA_BLOCK_END}
+		</table>  
+	  </p>
+   
+   </div>
+
+   <span class="corners-bottom"><span></span></span></div>
+</div>
+</body>
+</html>

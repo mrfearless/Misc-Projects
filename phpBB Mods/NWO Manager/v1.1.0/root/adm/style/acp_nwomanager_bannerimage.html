@@ -1,0 +1,55 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{BANNER_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_BANNER_DESC}</p>
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3"><a href="{U_ACP_NWOMANAGER_BANNERIMAGES}">{L_ACP_NWOMANAGER_BANNERIMAGES}</a> -&gt; {BANNER_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_BANNERIMAGE}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_bannerimage" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="bannername">{L_ACP_NWOMANAGER_BANNER_NAME}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_NAME_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="bannername" type="text" size=30 value="{BANNER_NAME}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="bannerimage">{L_ACP_NWOMANAGER_BANNER_IMAGE}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_IMAGE_EXPLAIN}</span></dt>
+			<dd><input maxlength="255" name="bannerimage" type="text" size=90 value="{BANNER_IMAGE}" class="inputbox autowidth"/></dd>
+		</dl>
+		<!-- //<dl>
+			<dt><label for="bannertype">{L_ACP_NWOMANAGER_BANNER_TYPE}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_TYPE_EXPLAIN}</span></dt>
+			<dd><select name="bannertype">{BANNER_TYPE}</select></dd>
+		</dl> -->
+		<dl>
+			<dt><label for="bannerlinktarget">{L_ACP_NWOMANAGER_BANNER_LINK}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_LINK_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="bannerlinktarget" type="text" size=90 value="{BANNER_LINK}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="bannerdescription">{L_ACP_NWOMANAGER_BANNER_DSC}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_DSC_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="bannerdescription" type="text" size=90 value="{BANNER_DESC}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="bannervisible">{L_ACP_NWOMANAGER_BANNER_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_BANNER_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="bannervisible" value="1"<!-- IF S_BANNER_VISIBLE --> id="bannervisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="bannervisible" value="0"<!-- IF not S_BANNER_VISIBLE --> id="bannervisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,62 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{BLOCK_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_MENUBLOCK_DESC}</p><!--<a href="{U_ACP_NWOMANAGER_MENULINKS}">{L_ACP_NWOMANAGER_MENULINKS}</a> -&gt; {CAT_TITLE}</p>-->
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%"><a href="{U_ACP_NWOMANAGER_MENULINKS}">{L_ACP_NWOMANAGER_MENULINKS}</a> -&gt; {BLK_TITLE}</td>
+		</tr>
+		<tr>
+			<th>{L_ACP_NWOMANAGER_MENUBLOCK}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+<form id="nwomanager_block" name="post" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="blocktitle">{L_ACP_NWOMANAGER_MENUBLOCK_TITLE}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_TITLE_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="blocktitle" type="text" size=30 value="{BLOCK_TITLE}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="blocktext">{L_ACP_NWOMANAGER_MENUBLOCK_TEXT}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_TEXT_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="60" name="blocktext" type="text" size=30 value="{BLOCK_TEXT}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="blockurl">{L_ACP_NWOMANAGER_MENUBLOCK_URL}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_URL_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="255" name="blockurl" type="text" size=30 value="{BLOCK_URL}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="blockclass">{L_ACP_NWOMANAGER_MENUBLOCK_CLASS}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_CLASS_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="30" name="blockclass" type="text" size=30 value="{BLOCK_CLASS}" class="inputbox autowidth"/></label></dd>
+		</dl>
+						<dl>
+			<dt><label for="blockdivid">{L_ACP_NWOMANAGER_MENUBLOCK_DIVID}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_DIVID_EXPLAIN}</span></dt>
+			<dd><label><input maxlength="30" name="blockdivid" type="text" size=30 value="{BLOCK_DIVID}" class="inputbox autowidth"/></label></dd>
+		</dl>
+		<dl>
+			<dt><label for="blockposition">{L_ACP_NWOMANAGER_MENUBLOCK_POSITION}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_POSITION_EXPLAIN}</span></dt>
+			<dd><select name="blockposition">{BLOCK_POSITION}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="blocktype">{L_ACP_NWOMANAGER_MENUBLOCK_TYPE}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_TYPE_EXPLAIN}</span></dt>
+			<dd><select name="blocktype">{BLOCK_TYPE}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="blockvisible">{L_ACP_NWOMANAGER_MENUBLOCK_VISIBLE}:</label><br /><span>{L_ACP_NWOMANAGER_MENUBLOCK_VISIBLE_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="blockvisible" value="1"<!-- IF S_BLOCK_VISIBLE --> id="blockvisible" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="blockvisible" value="0"<!-- IF not S_BLOCK_VISIBLE --> id="blockvisible" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+	</td></tr>
+	</tbody>
+</table>
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+<!-- INCLUDE overall_footer.html -->

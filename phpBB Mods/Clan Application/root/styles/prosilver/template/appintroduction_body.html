@@ -1,0 +1,24 @@
+<!-- INCLUDE overall_header.html -->
+<form id="application_introduction" method="post" action="{PROCESS_APPINTRODUCTION}"{S_FORM_ENCTYPE}>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<h2>{PAGE_TITLE}</h2>
+	<div class="content">
+		<!-- IF appform -->
+    		<!-- BEGIN appform -->
+    			<p><strong>{appform.SECTION_TITLE}</strong></p>
+    			<p>{appform.SECTION_TEXT}</p>
+    			<p></p>
+    		<!-- END appform -->
+    	<!-- ENDIF -->
+	</div>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<fieldset class="submit-buttons">
+	{S_HIDDEN_FIELDS}
+	<input type="submit" name="continue_application" value="<!-- IF S_QUESTIONS -->{L_APP_CONTINUE}<!-- ELSE -->{L_APP_SUBMIT}<!-- ENDIF -->" class="button1" />
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,73 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{BLOCK_PAGETITLE}</h1>
+<p>{L_ACP_NWOMANAGER_THEREARE}{TOTAL_MENUS}{L_ACP_NWOMANAGER_MENUSES}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<td class="row3" width="100%" colspan="5"><a href="{U_ACP_NWOMANAGER_LINKS}">{L_ACP_NWOMANAGER_LINKS}</a> -&gt; {BLOCK_TITLE}</td>
+		</tr>
+		<tr>
+			<th width="30%">{L_ACP_NWOMANAGER_MENU_TEXT}</th>
+			<th width="40%">{L_ACP_NWOMANAGER_MENU_URL}</th>
+			<th width="20%">{L_ACP_NWOMANAGER_MENU_IMAGE}</th>
+			<th width="5%">{L_ACP_NWOMANAGER_MENU_VISIBLE}</th>
+			<th width="5%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- IF .menus -->
+		<!-- BEGIN menus -->
+		<!-- IF menus.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+
+			<td>{menus.MENU_TEXT}</td>
+			<td>{menus.MENU_URL}</td>
+			<td>{menus.MENU_IMAGE}</td>
+			<td><!-- IF menus.S_MENU_VISIBLE -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+			<td class="row3"; style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+				<a href="{menus.U_VISIBLE}"><!-- IF menus.S_MENU_VISIBLE -->{ICON_BULB_ON}<!-- ELSE -->{ICON_BULB_OFF}<!-- ENDIF --></a>
+		   		<!-- IF menus.S_FIRST_ROW && not menus.S_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{menus.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not menus.S_FIRST_ROW && not menus.S_LAST_ROW-->
+					<a href="{menus.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					<a href="{menus.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF menus.S_LAST_ROW && not menus.S_FIRST_ROW -->
+					<a href="{menus.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<a href="{menus.U_EDIT}">{ICON_EDIT}</a>
+				<a href="{menus.U_DELETE}">{ICON_DELETE}</a></td>
+		</tr>
+		<!-- END menus -->
+<!-- ELSE -->
+	<tr>
+		<td align="center" colspan="6">{L_ACP_NWOMANAGER_NO_MENUS}</td>
+	</tr>
+<!-- ENDIF -->
+	</tbody>
+</table>
+
+<div class="clearfix">&nbsp;</div>
+
+<form id="addmenu" method="post">
+
+<fieldset class="quick" style="float: left;">
+	<input type="text" name="menutext" maxlength="30" />
+	<input class="button2" name="addmenu" type="submit" value="{L_ACP_NWOMANAGER_ADD_MENU}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->
