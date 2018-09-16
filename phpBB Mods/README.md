@@ -7,6 +7,6 @@ Misc phpBB 2.x mods created a few years ago for the NewWorldOrder (NWO) CounterS
 * NWO Manager - Back end control panels for NWO forum administrators
 * nwoadmins - Forum user page that lists NWO admin members (i think)
 * nwomembers - Forum user page that lists NWO clan members (i think)
-* Subscription Mod - Back end control panel for subcriptions
+* Subscription Mod - Back end control panel for subscriptions
 
-** Note:** Unlikely to be useable as these where made for an older phpBB version and mods have been overhauled and are now known as extensions.
+**Note:** Unlikely to be useable as these where made for an older phpBB version and mods have been overhauled and are now known as extensions.
